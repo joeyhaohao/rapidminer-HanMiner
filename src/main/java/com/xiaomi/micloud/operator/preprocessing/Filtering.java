@@ -19,7 +19,7 @@ public class Filtering extends Operator {
      * @param description
      *            the operator description
      */
-    public WordSegmentation(OperatorDescription description) {
+    public Filtering(OperatorDescription description) {
         super(description);
     }
 }

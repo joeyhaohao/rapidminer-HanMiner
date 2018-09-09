@@ -16,7 +16,7 @@ repositories {
 extensionConfig {
 
     // The extension name
-    name 'NLPTool'
+    name 'Text Miner'
 
     /*
      * The artifact group which will be used when publishing the extensions Jar
@@ -32,7 +32,7 @@ extensionConfig {
      *
      * It is 'RapidMiner GmbH' by default.
      */
-    vendor = "xiaomi yunhao"
+    vendor = "yunhao"
 
     /*
      * The vendor homepage which will be displayed in the extensions about box
@@ -51,6 +51,7 @@ extensionConfig {
 
 // Define third party library dependencies
 dependencies {
-	//compile 'com.google.guava:guava:18.0'
+//	compile 'com.google.guava:guava:18.0'
+//    compile fileTree(dir: 'libs', include: '*.jar')
     compile files("jieba-analysis-1.0.3-SNAPSHOT.jar")
 }

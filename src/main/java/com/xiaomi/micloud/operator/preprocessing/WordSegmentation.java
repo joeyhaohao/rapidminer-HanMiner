@@ -5,7 +5,7 @@ import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import com.huaban.analysis.jieba.viterbi.JiebaSegmenter;
+//import com.huaban.analysis.jieba.viterbi.JiebaSegmenter;
 
 /**
  * Describe what your operator does.
@@ -20,7 +20,7 @@ public class WordSegmentation extends Operator {
      */
     private InputPort exampleSetInput = getInputPorts().createPort("document");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("document");
-    private JiebaSegmenter segmenter = new JiebaSegmenter();
+//    private JiebaSegmenter segmenter = new JiebaSegmenter();
 
     /**
      * The default constructor needed in exactly this signature

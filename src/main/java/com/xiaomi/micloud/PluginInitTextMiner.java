@@ -1,7 +1,7 @@
 /*
- * xiaomi yunhao
+ * yunhao
  * 
- * Copyright (C) 2018-2018 by xiaomi yunhao and the contributors
+ * Copyright (C) 2018-2018 by yunhao and the contributors
  * 
  * Complete list of developers available at our web site:
  * 
@@ -30,9 +30,9 @@ import com.rapidminer.gui.MainFrame;
  *
  * @author REPLACEME
  */
-public final class PluginInitNLPTool {
+public final class PluginInitTextMiner {
 
-		private PluginInitNLPTool() {
+		private PluginInitTextMiner() {
 				// Utility class constructor
 		}
 
