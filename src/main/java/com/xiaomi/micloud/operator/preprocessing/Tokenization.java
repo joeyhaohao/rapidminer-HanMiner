@@ -20,7 +20,7 @@ import java.util.Locale;
  * @author Insert your name here
  *
  */
-public class WordSegmentation extends Operator {
+public class Tokenization extends Operator {
 
     /**
      * @param description
@@ -35,7 +35,7 @@ public class WordSegmentation extends Operator {
      * @param description
      *            the operator description
      */
-    public WordSegmentation(OperatorDescription description) {
+    public Tokenization(OperatorDescription description) {
         super(description);
     }
 
@@ -43,8 +43,7 @@ public class WordSegmentation extends Operator {
     public void doWork() throws OperatorException {
         String str = exampleSetInput.getData(SimpleResultObject.class).toString();
         List<SegToken> tokens = segmenter.process(str,SegMode.SEARCH);
-        String result = String.format(Locale.getDefault(), "\n%s\n%s", tokens.toString());
-        SimpleResultObject output = new SimpleResultObject("Document",result);
+        SimpleResultObject output = new SimpleResultObject("Document",tokens.toString());
         exampleSetOutput.deliver(output);
     }
 }
