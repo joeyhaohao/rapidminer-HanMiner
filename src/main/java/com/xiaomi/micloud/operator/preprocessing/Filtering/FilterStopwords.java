@@ -1,11 +1,15 @@
-package com.xiaomi.micloud.operator.preprocessing;
+package com.xiaomi.micloud.operator.preprocessing.Filtering;
 
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
+import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 
-public class Filtering extends Operator {
+import java.util.HashSet;
+import java.util.Set;
+
+public class FilterStopwords extends Operator {
 
     /**
      * @param description
@@ -19,7 +23,15 @@ public class Filtering extends Operator {
      * @param description
      *            the operator description
      */
-    public Filtering(OperatorDescription description) {
+    public FilterStopwords(OperatorDescription description) {
         super(description);
+    }
+
+    @Override
+    public void doWork() throws OperatorException {
+//        Set stopwordSet = new HashSet<String> {
+//
+//        }
+
     }
 }
