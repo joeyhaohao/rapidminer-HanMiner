@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<operators name="textminer" version="6.0" docbundle="com/xiaomi/micloud/resources/i18n/OperatorsDocTextMiner">
+    <group key="">
+        <!-- This is an example how to specify Operators and Operator groups. The Operator groups define
+                where Operators will be located in the Operator tree. -->
+        <group key="IO">
+           <operator>
+              <key>CreateDocument</key>
+              <class>com.xiaomi.micloud.operator.io.CreateDocument</class>
+           </operator>
+         </group>
+        <group key="Preprocessing">
+            <group key="Filtering">
+                <operator>
+                    <key>Filtering</key>
+                    <class>com.xiaomi.micloud.operator.preprocessing.Filtering.FilterStopwords</class>
+                </operator>
+            </group>
+            <operator>
+                <key>Tokenization</key>
+                <class>com.xiaomi.micloud.operator.preprocessing.Tokenization</class>
+            </operator>
+        </group>
+        <group key="">
+            <operator>
+                <key>Test</key>
+                <class>com.xiaomi.micloud.operator.Test</class>
+            </operator>
+            <operator>
+                <key>Test1</key>
+                <class>com.xiaomi.micloud.operator.Test1</class>
+            </operator>
+        </group>
+    </group>
+</operators>

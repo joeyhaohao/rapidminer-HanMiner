@@ -41,8 +41,8 @@ public class Tokenization extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        String str = exampleSetInput.getData(SimpleResultObject.class).toString();
-        List<SegToken> tokens = segmenter.process(str,SegMode.SEARCH);
+        String doc = exampleSetInput.getData(SimpleResultObject.class).toString();
+        List<SegToken> tokens = segmenter.process(doc,SegMode.SEARCH);
         SimpleResultObject output = new SimpleResultObject("Document",tokens.toString());
         exampleSetOutput.deliver(output);
     }
