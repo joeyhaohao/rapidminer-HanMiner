@@ -43,7 +43,8 @@ public class Tokenization extends Operator {
     public void doWork() throws OperatorException {
         String doc = exampleSetInput.getData(SimpleResultObject.class).toString();
         List<SegToken> tokens = segmenter.process(doc,SegMode.SEARCH);
-        SimpleResultObject output = new SimpleResultObject("Document",tokens.toString());
-        exampleSetOutput.deliver(output);
+        String result = tokens.toString().replaceAll("\\[|\\]","");
+        SimpleResultObject resultObject = new SimpleResultObject("Document",result);
+        exampleSetOutput.deliver(resultObject);
     }
 }
