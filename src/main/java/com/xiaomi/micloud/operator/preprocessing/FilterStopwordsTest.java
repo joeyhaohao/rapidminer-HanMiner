@@ -1,8 +1,11 @@
-package com.xiaomi.micloud.operator.preprocessing.Filtering;
+package com.xiaomi.micloud.operator.preprocessing;
+import com.rapidminer.operator.SimpleResultObject;
 import org.junit.Test;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -20,15 +23,26 @@ public class FilterStopwordsTest {
             BufferedReader br = new BufferedReader(reader); // 建立一个对象，它把文件内容转成计算机能读懂的语言
             String line = null;
             while ((line = br.readLine()) != null) {
-                for (String s:line.split("\\s+")){
+                for (String s:line.split(",")){
                     stopwordSet.add(s);
                 }
             }
-            System.out.print(stopwordSet.toString());
 
+            List wordList = new ArrayList<String>();
+            String doc = "我, 爱, 北京, 的, 一个, 天安门";
+            for (String word: doc.replace(" ","").split(",")){
+                if (!stopwordSet.contains(word)){
+                    wordList.add(word);
+                }
+            }
+            String result = wordList.toString().replaceAll("\\[|\\]","");
+//            SimpleResultObject resultObject = new SimpleResultObject("Document",result);
+//            exampleSetOutput.deliver(resultObject);
 
+            System.out.println(result);
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 }

@@ -53,4 +53,5 @@ extensionConfig {
 dependencies {
 //	compile 'com.google.guava:guava:18.0'
     compile fileTree(dir: 'lib', include: '*.jar')
+    provided "com.rapidminer.external:vldocking:1.2.2"
 }

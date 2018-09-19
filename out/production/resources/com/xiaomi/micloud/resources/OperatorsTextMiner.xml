@@ -10,12 +10,10 @@
            </operator>
          </group>
         <group key="Preprocessing">
-            <group key="Filtering">
-                <operator>
-                    <key>Filtering</key>
-                    <class>com.xiaomi.micloud.operator.preprocessing.Filtering.FilterStopwords</class>
-                </operator>
-            </group>
+            <operator>
+                <key>Filtering</key>
+                <class>com.xiaomi.micloud.operator.preprocessing.FilterStopwords</class>
+            </operator>
             <operator>
                 <key>Tokenization</key>
                 <class>com.xiaomi.micloud.operator.preprocessing.Tokenization</class>
