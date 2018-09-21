@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.document;
+package com.xiaomi.micloud.text;
 
 /**
  * Copyright (C) 2001-2018 by RapidMiner and the contributors
@@ -23,11 +23,6 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
-import com.rapidminer.example.Attribute;
-import com.rapidminer.example.Attributes;
-import com.rapidminer.example.Example;
-import com.rapidminer.example.ExampleReader;
-import com.rapidminer.example.table.ExampleTable;
 import com.rapidminer.operator.ResultObject;
 
 
@@ -39,14 +34,14 @@ import com.rapidminer.operator.ResultObject;
  *
  * @author Ingo Mierswa
  */
-public interface RMDocument extends ResultObject, Cloneable {
+public interface Text extends ResultObject, Cloneable {
 
     /** necessary since default method was added */
     static final long serialVersionUID = 4100925167567270064L;
 
     // ------------- Misc -----------------------------
 
-    /** Clones the RMDocument. */
+    /** Clones the Text. */
     public Object clone();
 
 

@@ -4,20 +4,10 @@ import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.SimpleResultObject;
-import com.rapidminer.operator.io.AbstractReader;
-import com.rapidminer.operator.nio.CSVExampleSource;
-import com.rapidminer.operator.nio.CSVExampleSourceConfigurationWizardCreator;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import com.rapidminer.parameter.ParameterType;
-import com.rapidminer.parameter.ParameterTypeConfiguration;
-import com.xiaomi.micloud.operator.io.TXTExampleSource;
 
 import java.util.*;
-import java.io.File;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
 
 /**
  *
@@ -29,8 +19,8 @@ import java.io.FileInputStream;
 
 public class FilterStopwords extends Operator {
 
-    private InputPort exampleSetInput = getInputPorts().createPort("document");
-    private OutputPort exampleSetOutput = getOutputPorts().createPort("document");
+    private InputPort exampleSetInput = getInputPorts().createPort("text");
+    private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
 
     /**
@@ -74,7 +64,7 @@ public class FilterStopwords extends Operator {
             }
         }
         String result = wordList.toString().replaceAll("\\[|\\]","");
-        SimpleResultObject resultObject = new SimpleResultObject("RMDocument",result);
+        SimpleResultObject resultObject = new SimpleResultObject("Text",result);
         exampleSetOutput.deliver(resultObject);
 
     }

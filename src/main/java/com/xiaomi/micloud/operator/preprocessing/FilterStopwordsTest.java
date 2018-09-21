@@ -44,7 +44,7 @@ public class FilterStopwordsTest {
             }
         }
         String result = wordList.toString().replaceAll("\\[|\\]","");
-//            SimpleResultObject resultObject = new SimpleResultObject("RMDocument",result);
+//            SimpleResultObject resultObject = new SimpleResultObject("Text",result);
 //            exampleSetOutput.deliver(resultObject);
 
         System.out.println(result);

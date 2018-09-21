@@ -4,9 +4,13 @@
         <!-- This is an example how to specify Operators and Operator groups. The Operator groups define
                 where Operators will be located in the Operator tree. -->
         <group key="IO">
+            <operator>
+                <key>ReadText</key>
+                <class>com.xiaomi.micloud.operator.io.ReadText</class>
+            </operator>
            <operator>
-              <key>CreateDocument</key>
-              <class>com.xiaomi.micloud.operator.io.CreateDocument</class>
+              <key>CreateText</key>
+              <class>com.xiaomi.micloud.operator.io.CreateText</class>
            </operator>
          </group>
         <group key="Preprocessing">

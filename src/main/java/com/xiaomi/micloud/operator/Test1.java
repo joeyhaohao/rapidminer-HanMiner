@@ -27,8 +27,8 @@ public class Test1 extends Operator {
     /**
      * @param description
      */
-    private InputPort exampleSetInput = getInputPorts().createPort("document");
-    private OutputPort exampleSetOutput = getOutputPorts().createPort("document");
+    private InputPort exampleSetInput = getInputPorts().createPort("text");
+    private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
     /**
      * The default constructor needed in exactly this signature

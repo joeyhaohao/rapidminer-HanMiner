@@ -25,8 +25,8 @@ public class Tokenization extends Operator {
     /**
      * @param description
      */
-    private InputPort exampleSetInput = getInputPorts().createPort("document");
-    private OutputPort exampleSetOutput = getOutputPorts().createPort("document");
+    private InputPort exampleSetInput = getInputPorts().createPort("text");
+    private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
     private JiebaSegmenter segmenter = new JiebaSegmenter();
 
     /**
@@ -44,7 +44,7 @@ public class Tokenization extends Operator {
         String doc = exampleSetInput.getData(SimpleResultObject.class).toString();
         List<SegToken> tokens = segmenter.process(doc,SegMode.SEARCH);
         String result = tokens.toString().replaceAll("\\[|\\]","");
-        SimpleResultObject resultObject = new SimpleResultObject("RMDocument",result);
+        SimpleResultObject resultObject = new SimpleResultObject("Text",result);
         exampleSetOutput.deliver(resultObject);
     }
 }

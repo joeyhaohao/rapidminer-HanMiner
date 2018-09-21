@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.document;
+package com.xiaomi.micloud.text;
 
 /**
  * Copyright (C) 2001-2018 by RapidMiner and the contributors
@@ -32,9 +32,6 @@ import com.rapidminer.example.table.MemoryExampleTable;
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.IOObject;
 import com.rapidminer.operator.ResultObjectAdapter;
-import com.rapidminer.tools.Ontology;
-import com.rapidminer.tools.Tools;
-import com.rapidminer.tools.XMLException;
 
 
 /**
@@ -46,7 +43,7 @@ import com.rapidminer.tools.XMLException;
  *
  * @author Ingo Mierswa, Simon Fischer
  */
-public class SimpleDocument extends ResultObjectAdapter implements RMDocument {
+public class SimpleText extends ResultObjectAdapter implements Text {
 
     private static final long serialVersionUID = 8596141056047402798L;
 
@@ -62,14 +59,14 @@ public class SimpleDocument extends ResultObjectAdapter implements RMDocument {
      * method {@link MemoryExampleTable#createExampleSet()} instead unless you are absolutely sure
      * what you are doing.
      */
-    public SimpleDocument(String doc) {
+    public SimpleText(String doc) {
         this.document = doc;
     }
 
     /** This method overrides the implementation of ResultObjectAdapter and returns "ExampleSet". */
     @Override
     public String getName() {
-        return "RMDocument";
+        return "Text";
     }
 
     /** Counts the number of examples which fulfills the condition. */
@@ -82,10 +79,10 @@ public class SimpleDocument extends ResultObjectAdapter implements RMDocument {
 
     @Override
     public String toString() {
-        StringBuffer str = new StringBuffer(this.getClass().getSimpleName() + ":" + Tools.getLineSeparator());
-        str.append(size() + "words" + Tools.getLineSeparator());
-
-        return str.toString();
+//        StringBuffer str = new StringBuffer(this.getClass().getSimpleName() + ":" + Tools.getLineSeparator());
+//        str.append(size() + "words" + Tools.getLineSeparator());
+//        return str.toString();
+        return document;
     }
 
     // -------------------- File Writing --------------------
@@ -127,14 +124,14 @@ public class SimpleDocument extends ResultObjectAdapter implements RMDocument {
      * attribute statistics must be (re-)calculated after the clone was created.
      */
     @Override
-    public RMDocument clone() {
+    public Text clone() {
         try {
-            Class<? extends SimpleDocument> clazz = getClass();
-            Constructor<? extends SimpleDocument> cloneConstructor = clazz.getConstructor(new Class[] { clazz });
-            SimpleDocument result = cloneConstructor.newInstance(new Object[] { this });
+            Class<? extends SimpleText> clazz = getClass();
+            Constructor<? extends SimpleText> cloneConstructor = clazz.getConstructor(new Class[] { clazz });
+            SimpleText result = cloneConstructor.newInstance(new Object[] { this });
             return result;
         } catch (IllegalAccessException e) {
-            throw new RuntimeException("Cannot clone Document: " + e.getMessage());
+            throw new RuntimeException("Cannot clone Text: " + e.getMessage());
         } catch (NoSuchMethodException e) {
             throw new RuntimeException("'" + getClass().getName() + "' does not implement clone constructor!");
         } catch (java.lang.reflect.InvocationTargetException e) {
