@@ -23,10 +23,10 @@ The Textminer Extension for RapidMiner is a suite of quick tools for Chinese tex
 
 3. Clone this repo
 
-`git clone https://github.com/yunhaojohn/rapidminer-textminer.git`
+   `git clone https://github.com/yunhaojohn/rapidminer-textminer.git`
 
 4. On your project folder, execute
 
-`./gradlew installExtension`
+   `./gradlew installExtension`
 
 
