@@ -5,7 +5,7 @@ The Textminer Extension for RapidMiner is a suite of quick tools for Chinese tex
 
 * Text preprocessing
 
-  * Chinese word Segmentation
+  * Chinese word Segmentation (using [Jieba](https://github.com/huaban/jieba-analysis))
   
   * Filter stopwords
 
