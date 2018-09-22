@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.operator;
+package com.xiaomi.micloud.operator.test;
 
 import java.util.logging.Level;
 import com.rapidminer.example.Attribute;
@@ -22,6 +22,7 @@ import com.rapidminer.tools.Ontology;
  * @author Insert your name here
  *
  */
+@Deprecated
 public class Test1 extends Operator {
 
     /**

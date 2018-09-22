@@ -6,6 +6,7 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.SimpleResultObject;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
+import com.xiaomi.micloud.text.PlainText;
 
 import java.util.*;
 
@@ -57,14 +58,14 @@ public class FilterStopwords extends Operator {
         }
 
         List wordList = new ArrayList<String>();
-        String doc = exampleSetInput.getData(SimpleResultObject.class).toString();
-        for (String word: doc.replace(" ","").split(",")){
+        String text = exampleSetInput.getData(PlainText.class).toString();
+        for (String word: text.replace(" ","").split(",")){
             if (!stopwordSet.contains(word)){
                 wordList.add(word);
             }
         }
         String result = wordList.toString().replaceAll("\\[|\\]","");
-        SimpleResultObject resultObject = new SimpleResultObject("Text",result);
+        PlainText resultObject = new PlainText(result);
         exampleSetOutput.deliver(resultObject);
 
     }

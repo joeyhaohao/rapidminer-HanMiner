@@ -9,10 +9,9 @@ import com.rapidminer.operator.nio.file.FileObject;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.metadata.MetaData;
 import com.rapidminer.operator.ports.metadata.SimplePrecondition;
-import com.rapidminer.parameter.ParameterType;
-import com.rapidminer.parameter.ParameterTypeFile;
+import com.rapidminer.parameter.*;
 import com.xiaomi.micloud.text.Text;
-import com.xiaomi.micloud.text.SimpleText;
+import com.xiaomi.micloud.text.PlainText;
 
 import java.io.*;
 import java.util.List;
@@ -25,7 +24,9 @@ import java.util.List;
  */
 public class ReadText extends AbstractReader<Text> {
 
+    public static final String PARAMETER_TEXT = "text";
     public static final String PARAMETER_FILE = "file";
+    public static final String PARAMETER_IMPORT_FROM_FILE = "import_from_file";
 
     private InputPort fileInputPort = getInputPorts().createPort("file");
     private FileInputPortHandler filePortHandler = new FileInputPortHandler(this, fileInputPort, this.getFileParameterName());
@@ -48,8 +49,27 @@ public class ReadText extends AbstractReader<Text> {
     @Override
     public List<ParameterType> getParameterTypes() {
         List<ParameterType> types = super.getParameterTypes();
-        types.add(new ParameterTypeFile(PARAMETER_FILE,
-                "Name of the text file", "txt", false));
+        ParameterType type = new ParameterTypeText(
+                PARAMETER_TEXT,
+                "Text editor",
+                TextType.PLAIN,
+                false);
+        type.setExpert(false);
+        type.setPrimary(true);
+        type.setDefaultValue("This is a default text");
+        types.add(type);
+
+        type = new ParameterTypeBoolean(
+                PARAMETER_IMPORT_FROM_FILE,
+                "If set to true, import text from file.",
+                false);
+        type.setExpert(false);
+        types.add(type);
+
+        type = new ParameterTypeFile(PARAMETER_FILE,
+                "Name of the text file", "txt",true);
+        type.setExpert(false);
+        types.add(type);
         return types;
     }
 
@@ -68,20 +88,27 @@ public class ReadText extends AbstractReader<Text> {
 
     /** Creates (or reads) the ExampleSet that will be returned by {@link #apply()}. */
     public Text createDocument() throws OperatorException{
-        File file = getParameterAsFile(PARAMETER_FILE);
+        boolean import_from_file = getParameterAsBoolean(PARAMETER_IMPORT_FROM_FILE);
         Text result = null;
-        try{
-            InputStreamReader reader = new InputStreamReader(
-                        new FileInputStream(file));
-            BufferedReader br = new BufferedReader(reader);
-            String doc = br.readLine();
-            if (doc!=null){
-                result = new SimpleText(doc);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!import_from_file){
+            String text = getParameterAsString(PARAMETER_TEXT);
+            result = new PlainText(text);
         }
+        else{
+            File file = getParameterAsFile(PARAMETER_FILE);
+            try{
+                InputStreamReader reader = new InputStreamReader(
+                        new FileInputStream(file));
+                BufferedReader br = new BufferedReader(reader);
+                String text = br.readLine();
+                if (text!=null){
+                    result = new PlainText(text);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         return result;
     }
 

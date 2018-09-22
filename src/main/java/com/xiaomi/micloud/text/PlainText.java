@@ -43,7 +43,7 @@ import com.rapidminer.operator.ResultObjectAdapter;
  *
  * @author Ingo Mierswa, Simon Fischer
  */
-public class SimpleText extends ResultObjectAdapter implements Text {
+public class PlainText extends ResultObjectAdapter implements Text {
 
     private static final long serialVersionUID = 8596141056047402798L;
 
@@ -59,7 +59,7 @@ public class SimpleText extends ResultObjectAdapter implements Text {
      * method {@link MemoryExampleTable#createExampleSet()} instead unless you are absolutely sure
      * what you are doing.
      */
-    public SimpleText(String doc) {
+    public PlainText(String doc) {
         this.document = doc;
     }
 
@@ -126,9 +126,9 @@ public class SimpleText extends ResultObjectAdapter implements Text {
     @Override
     public Text clone() {
         try {
-            Class<? extends SimpleText> clazz = getClass();
-            Constructor<? extends SimpleText> cloneConstructor = clazz.getConstructor(new Class[] { clazz });
-            SimpleText result = cloneConstructor.newInstance(new Object[] { this });
+            Class<? extends PlainText> clazz = getClass();
+            Constructor<? extends PlainText> cloneConstructor = clazz.getConstructor(new Class[] { clazz });
+            PlainText result = cloneConstructor.newInstance(new Object[] { this });
             return result;
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Cannot clone Text: " + e.getMessage());

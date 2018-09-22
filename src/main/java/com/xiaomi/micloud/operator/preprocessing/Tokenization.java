@@ -10,6 +10,7 @@ import com.rapidminer.operator.ports.OutputPort;
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import com.huaban.analysis.jieba.JiebaSegmenter.SegMode;
 import com.huaban.analysis.jieba.SegToken;
+import com.xiaomi.micloud.text.PlainText;
 
 import java.util.List;
 import java.util.Locale;
@@ -41,10 +42,10 @@ public class Tokenization extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        String doc = exampleSetInput.getData(SimpleResultObject.class).toString();
+        String doc = exampleSetInput.getData(PlainText.class).toString();
         List<SegToken> tokens = segmenter.process(doc,SegMode.SEARCH);
         String result = tokens.toString().replaceAll("\\[|\\]","");
-        SimpleResultObject resultObject = new SimpleResultObject("Text",result);
+        PlainText resultObject = new PlainText(result);
         exampleSetOutput.deliver(resultObject);
     }
 }

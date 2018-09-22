@@ -4,7 +4,7 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://rapid-i.com/schemas/documentation/reference/1.0 ">
 
-    <operator key="operator.nlptool:example_operator_key" locale="en"
+    <operator key="operator.textminer:example_operator_key" locale="en"
               version="6.0.000">
         <title>Example Operator</title>
         <synopsis>This is an example Operator. It does nothing when being executed.

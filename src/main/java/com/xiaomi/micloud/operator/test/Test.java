@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.operator;
+package com.xiaomi.micloud.operator.test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +14,7 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.tools.Ontology;
 
+@Deprecated
 public class Test extends Operator {
 
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");

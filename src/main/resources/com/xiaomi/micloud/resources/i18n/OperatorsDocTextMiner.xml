@@ -2,27 +2,35 @@
 <operatorHelp lang="en_EN">
     <!--  This is an example how to specify the translation of operator keys to names. -->
     <operator>
-      <key>CreateDocument</key>
-      <name>Create Document</name>
+        <key>read_text</key>
+        <name>Read Text</name>
+        <synopsis>This operator can read text.</synopsis>
     </operator>
     <operator>
-        <key>WordSegmentation</key>
-        <name>Word Segmentation</name>
+        <key>filter_stopwords</key>
+        <name>Filtering</name>
     </operator>
     <operator>
-        <key>Test</key>
+        <key>tokenization</key>
+        <name>Tokenization</name>
+    </operator>
+    <operator>
+        <key>test</key>
         <name>Test</name>
     </operator>
     <operator>
-        <key>Test1</key>
+        <key>test1</key>
         <name>Test1</name>
     </operator>
 
     <!-- This is how group keys are translated: -->
     <group>
-      <key>io</key>
-      <name>IO</name>
+        <key>io</key>
+        <name>IO</name>
     </group>
-
+    <group>
+        <key>preprocessing</key>
+        <name>Preprocessing</name>
+    </group>
 
 </operatorHelp>
