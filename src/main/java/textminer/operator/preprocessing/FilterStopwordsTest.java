@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.operator.preprocessing;
+package textminer.operator.preprocessing;
 import com.rapidminer.operator.SimpleResultObject;
 import org.junit.Test;
 

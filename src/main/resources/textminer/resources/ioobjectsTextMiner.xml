@@ -4,9 +4,9 @@
 	<!--
 	<ioobject
 		name="Example IOObject"
-		class="com.xiaomi.micloud.ioobjects.ExampleIOObject"
+		class="textminer.ioobjects.ExampleIOObject"
 		reportable="true">
-	  <renderer>com.xiaomi.micloud.ioobjects.renderer.ExampleIOObjectRenderer</renderer>
+	  <renderer>textminer.ioobjects.renderer.ExampleIOObjectRenderer</renderer>
 	</ioobject>
     -->
 </ioobjects>

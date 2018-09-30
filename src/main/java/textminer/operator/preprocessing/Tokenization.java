@@ -1,19 +1,17 @@
-package com.xiaomi.micloud.operator.preprocessing;
+package textminer.operator.preprocessing;
 
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
-import com.rapidminer.operator.SimpleResultObject;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import com.huaban.analysis.jieba.JiebaSegmenter.SegMode;
 import com.huaban.analysis.jieba.SegToken;
-import com.xiaomi.micloud.text.PlainText;
+import textminer.text.PlainText;
 
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Describe what your operator does.

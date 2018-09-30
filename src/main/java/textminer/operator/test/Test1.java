@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.operator.test;
+package textminer.operator.test;
 
 import java.util.logging.Level;
 import com.rapidminer.example.Attribute;

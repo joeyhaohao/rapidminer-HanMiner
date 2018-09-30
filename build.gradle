@@ -24,7 +24,7 @@ extensionConfig {
      *
      * It is 'com.rapidminer.extension' by default.
      */
-    groupId = 'com.xiaomi.micloud'
+    groupId = 'textminer'
 
     /*
      * The extension vendor which will be displayed in the extensions about box

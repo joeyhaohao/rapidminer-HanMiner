@@ -1,12 +1,11 @@
-package com.xiaomi.micloud.operator.preprocessing;
+package textminer.operator.preprocessing;
 
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
-import com.rapidminer.operator.SimpleResultObject;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import com.xiaomi.micloud.text.PlainText;
+import textminer.text.PlainText;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.operator.io;
+package textminer.operator.io;
 
 import java.util.LinkedList;
 import java.util.List;

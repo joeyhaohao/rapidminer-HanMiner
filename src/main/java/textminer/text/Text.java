@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.text;
+package textminer.text;
 
 /**
  * Copyright (C) 2001-2018 by RapidMiner and the contributors

@@ -1,4 +1,4 @@
-package com.xiaomi.micloud.operator.io;
+package textminer.operator.io;
 
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.OperatorDescription;
@@ -10,8 +10,8 @@ import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.metadata.MetaData;
 import com.rapidminer.operator.ports.metadata.SimplePrecondition;
 import com.rapidminer.parameter.*;
-import com.xiaomi.micloud.text.Text;
-import com.xiaomi.micloud.text.PlainText;
+import textminer.text.Text;
+import textminer.text.PlainText;
 
 import java.io.*;
 import java.util.List;
