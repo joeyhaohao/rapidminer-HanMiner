@@ -13,6 +13,8 @@ The Textminer Extension for RapidMiner is a suite of quick tools for Chinese tex
 
 * TextRank (in the future)
 
+* Sentiment Analysis (in the future)
+
 * Dependency Parser (in the future)
 
 ## Installation
