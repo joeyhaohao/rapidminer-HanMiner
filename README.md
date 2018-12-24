@@ -11,9 +11,9 @@ The Textminer Extension for RapidMiner is a suite of quick tools for Chinese tex
 
 * Word2Vec
 
-* Dependency Parser (in the future)
+* TextRank (in the future)
 
-* Semantic Analysis (in the future)
+* Dependency Parser (in the future)
 
 ## Installation
 
