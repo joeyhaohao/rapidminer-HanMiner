@@ -22,8 +22,7 @@ public class TokenizationTest {
         String result = new String();
         for (String text: textList){
             List<Term> segments = HanLP.segment(text);
-            List<String> words = segments.stream().map(term -> term.word).collect(Collectors.toList());
-            result = result + words.toString().replaceAll("\\[|\\]|,","") + '\n';
+            result = result + segments.toString().replaceAll("\\[|\\]|,","") + '\n';
         }
         System.out.println(result);
 

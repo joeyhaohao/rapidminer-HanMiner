@@ -7,20 +7,16 @@ import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import com.rapidminer.tools.Tools;
 import textminer.text.PlainText;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  *
- * This operator can be used to filter stopwords. This should be called after
- * word segmentation. The user can either use default stopwords list, or
- * load customized one from the file system.
+ * This operator can be used to filter stopwords. The input should be separated
+ * by white-space. User can either use default stopwords list, or load customized
+ * list from the file system.
  *
  * @author Joeyhaohao
  */
@@ -43,12 +39,10 @@ public class FilterStopwords extends Operator {
             List<String> wordList = Arrays.asList(text.split(" "));
             List<Term> termList = wordList.stream().map(word -> new Term(word,null)).collect(Collectors.toList());
             CoreStopWordDictionary.apply(termList);
-            wordList = termList.stream().map(term -> term.word).collect(Collectors.toList());
-            result = result + wordList.toString().replaceAll("\\[|\\]|,","") + '\n';
+            result = result + termList.toString().replaceAll("\\[|\\]|,","") + '\n';
         }
 
         PlainText resultObject = new PlainText(result);
         exampleSetOutput.deliver(resultObject);
-
     }
 }

@@ -83,8 +83,7 @@ public class FilterStopwordsTest {
             List<String> wordList = Arrays.asList(text.split(" "));
             List<Term> termList = wordList.stream().map(word -> new Term(word,null)).collect(Collectors.toList());
             CoreStopWordDictionary.apply(termList);
-            wordList = termList.stream().map(term -> term.word).collect(Collectors.toList());
-            result = result + wordList.toString().replaceAll("\\[|\\]|,","") + '\n';
+            result = result + termList.toString().replaceAll("\\[|\\]|,","") + '\n';
         }
 
         System.out.println(result);

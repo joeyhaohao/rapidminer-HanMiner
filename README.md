@@ -1,13 +1,13 @@
 ![](https://github.com/yunhaojohn/rapidminer-textminer/blob/master/src/main/resources/META-INF/icon.png) RapidMiner Textminer Extension
 ==============================
 
-The Textminer Extension for RapidMiner is a suite of quick tools for Chinese text mining. It supports:
+The Textminer Extension for RapidMiner is a set of implementations of tools for text mining in Chinese. It allows users to 
 
 * Text preprocessing
 
-  * Word Segmentation (using [Jieba](https://github.com/huaban/jieba-analysis))
+  * Word Segmentation
   
-  * Filter stopwords
+  * Stopwords Filtering
 
 * Word2Vec
 
