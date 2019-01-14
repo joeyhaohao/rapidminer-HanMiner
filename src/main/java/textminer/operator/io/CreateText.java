@@ -10,9 +10,9 @@ import com.rapidminer.parameter.*;
 import static com.rapidminer.operator.FileEchoOperator.PARAMETER_TEXT;
 
 /**
- * Describe what your operator does.
+ * This is a temporary template.
  *
- * @author Insert your name here
+ * @author Joeyhaohao
  *
  */
 @Deprecated
@@ -46,7 +46,7 @@ public class CreateText extends Operator {
                 TextType.PLAIN,
                 false);
         type.setExpert(false);
-        type.setPrimary(true);
+//        type.setPrimary(true);
         type.setDefaultValue("This is a default text");
         types.add(type);
         return types;

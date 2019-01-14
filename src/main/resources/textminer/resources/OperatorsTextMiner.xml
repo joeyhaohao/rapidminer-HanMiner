@@ -7,12 +7,12 @@
             <operator>
                 <deprecatedSince>1.0</deprecatedSince>
                 <key>test</key>
-                <class>textminer.operator.test.Test</class>
+                <class>textminer.operator.testOperator.Template1</class>
             </operator>
             <operator>
                 <deprecatedSince>1.0</deprecatedSince>
                 <key>test1</key>
-                <class>textminer.operator.test.Test1</class>
+                <class>textminer.operator.testOperator.Template2</class>
             </operator>
             <operator>
                 <deprecatedSince>1.1</deprecatedSince>

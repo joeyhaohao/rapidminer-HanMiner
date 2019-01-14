@@ -18,9 +18,9 @@ import java.util.List;
 
 
 /**
- * Super class of all operators requiring no input and creating an {@link ExampleSet}.
+ * Super class of all operators requiring no input and creating an {@link PlainText}.
  *
- * @author Simon Fischer
+ * @author Joeyhaohao
  */
 public class ReadText extends AbstractReader<Text> {
 
@@ -55,8 +55,8 @@ public class ReadText extends AbstractReader<Text> {
                 TextType.PLAIN,
                 false);
         type.setExpert(false);
-        type.setPrimary(true);
-        type.setDefaultValue("This is a default text");
+//        type.setPrimary(true);
+        type.setDefaultValue("This is a default text\n这是默认的文本");
         types.add(type);
 
         type = new ParameterTypeBoolean(
@@ -86,7 +86,7 @@ public class ReadText extends AbstractReader<Text> {
         return true;
     }
 
-    /** Creates (or reads) the ExampleSet that will be returned by {@link #apply()}. */
+    /** Creates (or reads) the text that will be returned by {@link #apply()}. **/
     public Text createDocument() throws OperatorException{
         boolean import_from_file = getParameterAsBoolean(PARAMETER_IMPORT_FROM_FILE);
         Text result = null;
