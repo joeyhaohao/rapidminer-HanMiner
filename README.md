@@ -1,21 +1,23 @@
+**Status:** Active (under active development, breaking changes may occur)
+
 ![](https://github.com/yunhaojohn/rapidminer-textminer/blob/master/src/main/resources/META-INF/icon.png) RapidMiner Textminer Extension
 ==============================
 
-The Textminer Extension for RapidMiner is a set of implementations of tools for text mining in Chinese. It allows users to 
+The Textminer Extension for [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from programming in Chinese text processing & mining. Integrated in Rapidminer environment, Textminer provides a set of easy-to-use text mining tools and allows users to work in the intuitive graphical user interface of Rapidminer.
+
+## Features
 
 * Text preprocessing
 
-  * Word Segmentation
+  * Word segmentation
   
-  * Stopwords Filtering
+  * Stopwords filtering
 
-* Word2Vec
+* Word2vec
 
 * TextRank (in the future)
 
 * Sentiment Analysis (in the future)
-
-* Dependency Parser (in the future)
 
 ## Installation
 
@@ -27,8 +29,12 @@ The Textminer Extension for RapidMiner is a set of implementations of tools for 
 
    `git clone https://github.com/yunhaojohn/rapidminer-textminer.git`
 
-4. On your project folder, execute
+4. On your project folder, execute in a terminal
 
    `./gradlew installExtension`
 
+## Acknowledgement
 
+1. [Rapidminer-studio](https://github.com/rapidminer/rapidminer-studio)
+
+2. [Hanlp](https://github.com/hankcs/HanLP)
