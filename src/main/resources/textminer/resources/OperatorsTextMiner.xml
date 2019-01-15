@@ -36,5 +36,13 @@
                 <class>textminer.operator.preprocessing.Tokenization</class>
             </operator>
         </group>
+        <group key="mining">
+            <group key="word">
+                <operator>
+                    <key>word_count</key>
+                    <class>textminer.operator.mining.word.WordCount</class>
+                </operator>
+            </group>
+        </group>
     </group>
 </operators>

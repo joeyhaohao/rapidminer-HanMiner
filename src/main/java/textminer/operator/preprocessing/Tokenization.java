@@ -35,7 +35,7 @@ public class Tokenization extends Operator {
         String result = new String();
         for (String text: textList){
             List<Term> segments = HanLP.segment(text);
-            result = result + segments.toString().replaceAll("\\[|\\]|,","") + '\n';
+            result += segments.toString().replaceAll("\\[|\\]|,","") + '\n';
         }
         PlainText resultObject = new PlainText(result);
         exampleSetOutput.deliver(resultObject);

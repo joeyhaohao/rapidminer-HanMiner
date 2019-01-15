@@ -15,12 +15,8 @@
         <name>Tokenization</name>
     </operator>
     <operator>
-        <key>test</key>
-        <name>Test</name>
-    </operator>
-    <operator>
-        <key>test1</key>
-        <name>Test1</name>
+        <key>word_count</key>
+        <name>Word Count</name>
     </operator>
 
     <!-- This is how group keys are translated: -->
@@ -31,6 +27,14 @@
     <group>
         <key>preprocessing</key>
         <name>Preprocessing</name>
+    </group>
+    <group>
+        <key>mining</key>
+        <name>Mining</name>
+    </group>
+    <group>
+        <key>mining.word</key>
+        <name>Word</name>
     </group>
 
 </operatorHelp>

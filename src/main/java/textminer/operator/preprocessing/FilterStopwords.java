@@ -39,7 +39,7 @@ public class FilterStopwords extends Operator {
             List<String> wordList = Arrays.asList(text.split(" "));
             List<Term> termList = wordList.stream().map(word -> new Term(word,null)).collect(Collectors.toList());
             CoreStopWordDictionary.apply(termList);
-            result = result + termList.toString().replaceAll("\\[|\\]|,","") + '\n';
+            result += termList.toString().replaceAll("\\[|\\]|,","") + '\n';
         }
 
         PlainText resultObject = new PlainText(result);
