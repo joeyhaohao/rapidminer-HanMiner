@@ -9,14 +9,14 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.tools.Ontology;
-import textminer.text.PlainText;
+import textminer.operator.io.PlainText;
 
 import java.util.*;
 
 /**
  *
- * This operator counts word occurrence in texts. The input words should be
- * separated by white-space.
+ * This operator counts word occurrence and frequency in texts.
+ * The input should be separated by white-space.
  *
  * @author Joeyhaohao
  */

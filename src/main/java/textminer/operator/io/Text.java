@@ -1,4 +1,4 @@
-package textminer.text;
+package textminer.operator.io;
 
 /**
  * Copyright (C) 2001-2018 by RapidMiner and the contributors
@@ -27,12 +27,9 @@ import com.rapidminer.operator.ResultObject;
 
 
 /**
- * Interface definition for all example sets. Usually, example sets do not contain any data but are
- * only views on an example table (for example for sampling or feature selection purposes). It
- * should be possible to create a layered view on the data, hence the name multi-layered data view.
- * ExampleSet implementation should support this view concept.
+ * Interface definition for text.
  *
- * @author Ingo Mierswa
+ * @author Joeyhaohao
  */
 public interface Text extends ResultObject, Cloneable {
 
@@ -54,15 +51,14 @@ public interface Text extends ResultObject, Cloneable {
     /**
      * Frees unused resources, if supported by the implementation. Does nothing by default.
      *
-     * @since 7.3
      */
     public default void cleanup() {
         // does nothing by default
     }
 
     /**
-     * Returns the number of examples in this example set. This number should not be used to create
-     * for-loops to iterate through all examples.
+     * Returns the number of characters in the text. This number should not be used to create
+     * for-loops to iterate through all characters.
      */
     public int size();
 

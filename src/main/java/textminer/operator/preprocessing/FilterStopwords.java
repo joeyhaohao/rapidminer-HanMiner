@@ -7,7 +7,7 @@ import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import textminer.text.PlainText;
+import textminer.operator.io.PlainText;
 
 import java.util.*;
 import java.util.stream.Collectors;

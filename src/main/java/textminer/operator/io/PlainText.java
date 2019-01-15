@@ -1,4 +1,4 @@
-package textminer.text;
+package textminer.operator.io;
 
 /**
  * Copyright (C) 2001-2018 by RapidMiner and the contributors
@@ -28,48 +28,42 @@ import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.nio.charset.Charset;
 import java.util.zip.GZIPOutputStream;
-import com.rapidminer.example.table.MemoryExampleTable;
+
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.IOObject;
 import com.rapidminer.operator.ResultObjectAdapter;
 
 
 /**
- * Implements wrapper methods of abstract example set. Implements all ResultObject methods.<br>
+ * Implements wrapper methods of abstract text. Implements all ResultObject methods.<br>
  *
  * Apart from the interface methods the implementing classes must have a public single argument
  * clone constructor. This constructor is invoked by reflection from the clone method. Do not forget
  * to call the superclass method.
  *
- * @author Ingo Mierswa, Simon Fischer
+ * @author Joeyhaohao
  */
 public class PlainText extends ResultObjectAdapter implements Text {
 
     private static final long serialVersionUID = 8596141056047402798L;
 
-    /** The table used for reading the examples from. */
+    /** The document used for reading the texts from. */
     private String document;
 
     /**
-     * Constructs a new SimpleExampleSet backed by the given example table. The example set
-     * initially does not have any special attributes but all attributes from the given table will
-     * be used as regular attributes.
-     *
-     * If you are constructing the example set from a {@link MemoryExampleTable}, you should use the
-     * method {@link MemoryExampleTable#createExampleSet()} instead unless you are absolutely sure
-     * what you are doing.
+     * Constructs a new Plaintext backed by the given document.
      */
     public PlainText(String doc) {
         this.document = doc;
     }
 
-    /** This method overrides the implementation of ResultObjectAdapter and returns "ExampleSet". */
+    /** This method overrides the implementation of ResultObjectAdapter and returns "Text". */
     @Override
     public String getName() {
         return "Text";
     }
 
-    /** Counts the number of examples which fulfills the condition. */
+    /** Counts the length of document. */
     @Override
     public int size() {
         return document.length();
@@ -107,7 +101,7 @@ public class PlainText extends ResultObjectAdapter implements Text {
     }
 
 
-    /** Returns the hash code of all attributes. */
+    /** Returns the hash code of the text. */
     @Override
     public int hashCode() {
         return document.hashCode();
@@ -119,9 +113,7 @@ public class PlainText extends ResultObjectAdapter implements Text {
     }
 
     /**
-     * Clones the example set by invoking a single argument clone constructor. Please note that a
-     * cloned example set has no information about the attribute statistics. That means, that
-     * attribute statistics must be (re-)calculated after the clone was created.
+     * Clones the text by invoking a single argument clone constructor.
      */
     @Override
     public Text clone() {

@@ -8,9 +8,8 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 
-import textminer.text.PlainText;
+import textminer.operator.io.PlainText;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * This operator segments Chinese sentences into separate words. One sentence

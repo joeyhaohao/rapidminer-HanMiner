@@ -9,8 +9,6 @@ import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.metadata.MetaData;
 import com.rapidminer.operator.ports.metadata.SimplePrecondition;
 import com.rapidminer.parameter.*;
-import textminer.text.Text;
-import textminer.text.PlainText;
 
 import java.io.*;
 import java.util.List;
