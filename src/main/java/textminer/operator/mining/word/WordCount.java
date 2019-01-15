@@ -1,10 +1,14 @@
 package textminer.operator.mining.word;
 
+import com.rapidminer.example.Attribute;
+import com.rapidminer.example.ExampleSet;
+import com.rapidminer.example.table.*;
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
+import com.rapidminer.tools.Ontology;
 import textminer.text.PlainText;
 
 import java.util.*;
@@ -20,7 +24,7 @@ import java.util.*;
 public class WordCount extends Operator {
 
     private InputPort exampleSetInput = getInputPorts().createPort("text");
-    private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
+    private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public WordCount(OperatorDescription description) {
         super(description);
@@ -30,18 +34,41 @@ public class WordCount extends Operator {
     public void doWork() throws OperatorException {
         String doc = exampleSetInput.getData(PlainText.class).toString();
         String[] wordList = doc.split(" ");
+        Integer size = wordList.length;
         HashMap<String, Integer> wordMap = new HashMap<>();
         for (String word: wordList){
             wordMap.put(word, wordMap.getOrDefault(word, 0) + 1);
         }
         SortedSet<Map.Entry<String, Integer>> wordSorted = entriesSortedByValues(wordMap);
 
-        String result = new String();
-        for (Map.Entry<String, Integer> entry: wordSorted){
-            result += entry.getKey()+ '\t' + entry.getValue() + '\n';
+//        String result = new String();
+//        for (Map.Entry<String, Integer> entry: wordSorted){
+//            result += entry.getKey()+ '\t' + entry.getValue() + '\n';
+//        }
+
+        List<Attribute> listOfAtts = new LinkedList<>();
+        Attribute newNominalAtt = AttributeFactory.createAttribute("word",
+                Ontology.ATTRIBUTE_VALUE_TYPE.STRING);
+        listOfAtts.add(newNominalAtt);
+        Attribute newNumericalAtt = AttributeFactory.createAttribute("count",
+                Ontology.ATTRIBUTE_VALUE_TYPE.NUMERICAL);
+        listOfAtts.add(newNumericalAtt);
+        newNumericalAtt = AttributeFactory.createAttribute("frequency",
+                Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
+        listOfAtts.add(newNumericalAtt);
+        MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
+
+        for (Map.Entry<String,Integer> entry: wordSorted) {
+            double[] doubleArray = new double[listOfAtts.size()];
+            doubleArray[0] = newNominalAtt.getMapping().mapString(
+                    entry.getKey());
+            doubleArray[1] = entry.getValue();
+            doubleArray[2] = (double)entry.getValue()/size;
+            table.addDataRow(new DoubleArrayDataRow(doubleArray));
         }
-        PlainText resultObject = new PlainText(result);
-        exampleSetOutput.deliver(resultObject);
+
+        ExampleSet exampleSet = table.createExampleSet();
+        exampleSetOutput.deliver(exampleSet);
     }
 
     static <K,V extends Comparable<? super V>>
