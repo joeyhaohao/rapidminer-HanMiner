@@ -12,12 +12,20 @@ The Textminer Extension for [RapidMiner](https://www.rapidminer.com) aims at fre
   * Word segmentation
   
   * Stopwords filtering
+  
+  * Word Count
+  
+* Vectorizer
 
-* Word2vec
+  * TfIdfVectorizer
+  
+  * Word2vec/Doc2Vec
 
-* TextRank (in the future)
+* Mining
 
-* Sentiment Analysis (in the future)
+  * TextRank (in the future)
+
+  * Sentiment Analysis (in the future)
 
 ## Installation
 
