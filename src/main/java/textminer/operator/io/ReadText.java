@@ -15,7 +15,8 @@ import java.util.List;
 
 
 /**
- * Super class of all operators requiring no input and creating an {@link PlainText}.
+ * This operator can be used to create an {@link PlainText}. The user can load text
+ * from .txt files, or create it in a text editor.
  *
  * @author Joeyhaohao
  */

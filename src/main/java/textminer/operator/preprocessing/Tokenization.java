@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * This operator segments Chinese sentences into separate words. One sentence
- * takes one row (i.e. Sentences should be separated by '\n').
+ * takes one row. This means sentences should be separated by '\n'.
  *
  * @author Joeyhaohao
  *

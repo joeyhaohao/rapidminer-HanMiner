@@ -43,6 +43,12 @@
                     <class>textminer.operator.mining.word.WordCount</class>
                 </operator>
             </group>
+            <group key="vectorizer">
+                <operator>
+                    <key>tfidf</key>
+                    <class>textminer.operator.mining.vectorizer.TfIdf</class>
+                </operator>
+            </group>
         </group>
     </group>
 </operators>

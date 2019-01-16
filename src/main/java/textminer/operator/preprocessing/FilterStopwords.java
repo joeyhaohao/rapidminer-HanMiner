@@ -14,9 +14,9 @@ import java.util.stream.Collectors;
 
 /**
  *
- * This operator can be used to filter stopwords. The input should be separated
- * by white-space. User can either use default stopwords list, or load customized
- * list from the file system.
+ * This operator can be used to filter stopwords in text. The tokens should
+ * be separated by white-space. The user can either use default stopwords list,
+ * or load customized list from the file system.
  *
  * @author Joeyhaohao
  */

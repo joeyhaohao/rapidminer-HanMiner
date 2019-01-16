@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class TfIdfVectorizerTest {
+public class TfIdfTest {
 
     @Test
     public void main(){
@@ -32,7 +32,7 @@ public class TfIdfVectorizerTest {
 
         Set<String> wordSet = tfIdf.allTf().keySet();
         List<Attribute> listOfAtts = new LinkedList<>();
-        for (int i=0; i<wordSet.size(); i++){
+        for (int i = 0; i<wordSet.size(); i++){
             Attribute newNominalAtt = AttributeFactory.createAttribute("dim"+Integer.toString(i),
                     Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
             listOfAtts.add(newNominalAtt);

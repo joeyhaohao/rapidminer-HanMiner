@@ -9,6 +9,7 @@
     <operator>
         <key>filter_stopwords</key>
         <name>Filtering</name>
+        <synopsis>This operator can filter stopwords in text.</synopsis>
     </operator>
     <operator>
         <key>tokenization</key>
@@ -17,6 +18,10 @@
     <operator>
         <key>word_count</key>
         <name>Word Count</name>
+    </operator>
+    <operator>
+        <key>tfidf</key>
+        <name>TfIdf</name>
     </operator>
 
     <!-- This is how group keys are translated: -->
@@ -31,6 +36,10 @@
     <group>
         <key>mining</key>
         <name>Mining</name>
+    </group>
+    <group>
+        <key>mining.vectorizer</key>
+        <name>Vectorizer</name>
     </group>
     <group>
         <key>mining.word</key>
