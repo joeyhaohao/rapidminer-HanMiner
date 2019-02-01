@@ -10,15 +10,17 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.tools.Ontology;
+import textminer.operator.io.PlainText;
 
 import java.util.*;
 
 /**
  *
  * This operator can vectorize a set of documents using tf-idf. The documents
- * should be separate by '\n'. The output is an n*m example set {@link ExampleSet}
- * (n is number of documents, m is number of words in all documents). The result
- * can be used for training purpose.
+ * should be separate by '\n'. Stopwords will be automatically removed.
+ * Output is an n*m example set {@link ExampleSet} (n is number of documents,
+ * m is number of words in all documents). The result can be used for
+ * training models.
  *
  * @author Joeyhaohao
  */
@@ -34,17 +36,10 @@ public class TfIdf extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        String input = "商品 服务\n" +
-                "下雨天 地面 积水 分外 严重\n" +
-                "结婚 尚未 结婚 确实 干扰 分词\n" +
-                "买 水果 世博园 最后 世博会\n" +
-                "中国 首都 北京\n" +
-                "欢迎 新 老 师生 前来 就餐\n" +
-                "工信处 女 干事 每月 下属 科室 亲口 交代 24 口 交换机 技术性 器件 安装 工作\n" +
-                "页游 兴起 现在 页游 繁盛 依赖于 存档 进行 逻辑 判断 设计 减少 块 不能 完全 忽略 掉";
+        String doc = exampleSetInput.getData(PlainText.class).toString();
 
-        TfIdfCounter tfIdf = new TfIdfCounter();
-        String[] textList = input.split("\n");
+        TfIdfCounter tfIdf = new TfIdfCounter(true);
+        String[] textList = doc.split("\n");
         for (int i = 0; i < textList.length; i++) {
             tfIdf.add(i, textList[i]);
         }
@@ -55,9 +50,9 @@ public class TfIdf extends Operator {
         }
 
         List<Attribute> listOfAtts = new LinkedList<>();
-        Attribute newNominalAtt = AttributeFactory.createAttribute("text",
-                Ontology.ATTRIBUTE_VALUE_TYPE.STRING);
-        listOfAtts.add(newNominalAtt);
+//        Attribute newNominalAtt = AttributeFactory.createAttribute("text",
+//                Ontology.ATTRIBUTE_VALUE_TYPE.STRING);
+//        listOfAtts.add(newNominalAtt);
         for (int i = 0; i < word2dimMap.size(); i++) {
             Attribute newNumericalAtt = AttributeFactory.createAttribute("dim" + Integer.toString(i),
                     Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
@@ -70,8 +65,8 @@ public class TfIdf extends Operator {
             double[] doubleArray = new double[listOfAtts.size()];
             Arrays.fill(doubleArray, 0);
 
-            doubleArray[0] = newNominalAtt.getMapping().mapString(
-                    textList[(int)entry.getKey()]);
+//            doubleArray[0] = newNominalAtt.getMapping().mapString(
+//                    textList[(int)entry.getKey()]);
             for (String word: tfIdfMap.keySet()){
                 int index = word2dimMap.get(word);
                 doubleArray[index] = tfIdfMap.get(word);

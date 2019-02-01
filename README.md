@@ -14,14 +14,14 @@ The Textminer Extension for [RapidMiner](https://www.rapidminer.com) aims at fre
   * Stopwords filtering
   
   * Word Count
-  
-* Vectorizer
-
-  * TfIdfVectorizer
-  
-  * Word2vec/Doc2Vec
 
 * Mining
+
+  * Vectorizer
+
+    * TfIdfVectorizer
+  
+    * Word2vec/Doc2Vec
 
   * TextRank (in the future)
 
@@ -40,6 +40,8 @@ The Textminer Extension for [RapidMiner](https://www.rapidminer.com) aims at fre
 4. On your project folder, execute in a terminal
 
    `./gradlew installExtension`
+
+5. Happy mining!
 
 ## Acknowledgement
 
