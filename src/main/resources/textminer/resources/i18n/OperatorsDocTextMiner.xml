@@ -23,6 +23,10 @@
         <key>tfidf</key>
         <name>TfIdf</name>
     </operator>
+    <operator>
+        <key>doc2vec</key>
+        <name>Doc2vec</name>
+    </operator>
 
     <!-- This is how group keys are translated: -->
     <group>

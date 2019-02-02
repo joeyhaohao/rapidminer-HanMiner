@@ -48,6 +48,10 @@
                     <key>tfidf</key>
                     <class>textminer.operator.mining.vectorizer.TfIdf</class>
                 </operator>
+                <operator>
+                    <key>doc2vec</key>
+                    <class>textminer.operator.mining.vectorizer.Doc2vec</class>
+                </operator>
             </group>
         </group>
     </group>
