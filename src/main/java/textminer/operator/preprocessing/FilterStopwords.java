@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 public class FilterStopwords extends Operator {
 
-    private InputPort exampleSetInput = getInputPorts().createPort("text");
+    private InputPort textInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
     public FilterStopwords(OperatorDescription description) {
@@ -32,7 +32,7 @@ public class FilterStopwords extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        String doc = exampleSetInput.getData(PlainText.class).toString();
+        String doc = textInput.getData(PlainText.class).toString();
         String[] textList = doc.split("\n");
         String result = new String();
         for (String text: textList){

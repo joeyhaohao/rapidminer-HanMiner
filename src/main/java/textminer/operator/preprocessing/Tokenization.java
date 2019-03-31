@@ -20,7 +20,7 @@ import java.util.List;
  */
 public class Tokenization extends Operator {
 
-    private InputPort exampleSetInput = getInputPorts().createPort("text");
+    private InputPort textInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
     public Tokenization(OperatorDescription description) {
@@ -29,7 +29,7 @@ public class Tokenization extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        String doc = exampleSetInput.getData(PlainText.class).toString();
+        String doc = textInput.getData(PlainText.class).toString();
         String[] textList = doc.split("\n");
         String result = new String();
         for (String text: textList){
