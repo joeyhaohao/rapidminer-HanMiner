@@ -1,32 +1,29 @@
-package textminer.operator.preprocessing;
+package textminer.operator.processing;
 
-import com.hankcs.hanlp.dictionary.stopword.CoreStopWordDictionary;
 import com.hankcs.hanlp.seg.common.Term;
+import com.hankcs.hanlp.HanLP;
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import textminer.operator.io.PlainText;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import textminer.operator.io.PlainText;
+import java.util.List;
 
 /**
- *
- * This operator can be used to filter stopwords in text. The tokens should
- * be separated by white-space. The user can either use default stopwords list,
- * or load customized list from the file system.
+ * This operator segments Chinese sentences into separate words. One sentence
+ * takes one row. This means sentences should be separated by '\n'.
  *
  * @author Joeyhaohao
+ *
  */
-
-public class FilterStopwords extends Operator {
+public class Tokenization extends Operator {
 
     private InputPort textInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
-    public FilterStopwords(OperatorDescription description) {
+    public Tokenization(OperatorDescription description) {
         super(description);
     }
 
@@ -36,12 +33,9 @@ public class FilterStopwords extends Operator {
         String[] textList = doc.split("\n");
         String result = new String();
         for (String text: textList){
-            List<String> wordList = Arrays.asList(text.split(" "));
-            List<Term> termList = wordList.stream().map(word -> new Term(word,null)).collect(Collectors.toList());
-            CoreStopWordDictionary.apply(termList);
-            result += termList.toString().replaceAll("\\[|\\]|,","") + '\n';
+            List<Term> segments = HanLP.segment(text);
+            result += segments.toString().replaceAll("\\[|\\]|,","") + '\n';
         }
-
         PlainText resultObject = new PlainText(result);
         exampleSetOutput.deliver(resultObject);
     }

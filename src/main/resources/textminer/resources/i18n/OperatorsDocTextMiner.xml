@@ -34,8 +34,8 @@
         <name>IO</name>
     </group>
     <group>
-        <key>preprocessing</key>
-        <name>Preprocessing</name>
+        <key>processing</key>
+        <name>Processing</name>
     </group>
     <group>
         <key>mining</key>
