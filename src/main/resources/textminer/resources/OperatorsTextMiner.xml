@@ -20,23 +20,26 @@
                 <class>textminer.operator.io.CreateText</class>
             </operator>
         </group>
-        <group key="IO">
+        <group key="io">
+            <icon>text_into.png</icon>
             <operator>
                 <key>read_text</key>
                 <class>textminer.operator.io.ReadText</class>
             </operator>
         </group>
-        <group key="preprocessing">
+        <group key="processing">
+            <icon>text_processing.png</icon>
             <operator>
                 <key>filter_stopwords</key>
-                <class>textminer.operator.preprocessing.FilterStopwords</class>
+                <class>textminer.operator.processing.FilterStopwords</class>
             </operator>
             <operator>
                 <key>tokenization</key>
-                <class>textminer.operator.preprocessing.Tokenization</class>
+                <class>textminer.operator.processing.Tokenization</class>
             </operator>
         </group>
         <group key="mining">
+            <icon>text_mining.png</icon>
             <group key="word">
                 <operator>
                     <key>word_count</key>
@@ -47,6 +50,10 @@
                 <operator>
                     <key>tfidf</key>
                     <class>textminer.operator.mining.vectorizer.TfIdf</class>
+                </operator>
+                <operator>
+                    <key>doc2vec</key>
+                    <class>textminer.operator.mining.vectorizer.Doc2vec</class>
                 </operator>
             </group>
         </group>

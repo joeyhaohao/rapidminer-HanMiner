@@ -23,7 +23,7 @@ import java.util.*;
 
 public class WordCount extends Operator {
 
-    private InputPort exampleSetInput = getInputPorts().createPort("text");
+    private InputPort textInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public WordCount(OperatorDescription description) {
@@ -32,7 +32,7 @@ public class WordCount extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        String doc = exampleSetInput.getData(PlainText.class).toString();
+        String doc = textInput.getData(PlainText.class).toString();
         String[] wordList = doc.split(" ");
         Integer size = wordList.length;
         HashMap<String, Integer> wordMap = new HashMap<>();

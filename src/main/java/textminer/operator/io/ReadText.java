@@ -27,15 +27,18 @@ public class ReadText extends AbstractReader<Text> {
     public static final String PARAMETER_IMPORT_FROM_FILE = "import_from_file";
 
     private InputPort fileInputPort = getInputPorts().createPort("file");
-    private FileInputPortHandler filePortHandler = new FileInputPortHandler(this, fileInputPort, this.getFileParameterName());
+    private FileInputPortHandler filePortHandler = new FileInputPortHandler(
+            this, fileInputPort, this.getFileParameterName());
 
     static {
-        AbstractReader.registerReaderDescription(new AbstractReader.ReaderDescription("txt", ReadText.class, PARAMETER_FILE));
+        AbstractReader.registerReaderDescription(
+                new AbstractReader.ReaderDescription("txt", ReadText.class, PARAMETER_FILE));
     }
 
     public ReadText(final OperatorDescription description) {
         super(description, Text.class);
-        fileInputPort.addPrecondition(new SimplePrecondition(fileInputPort, new MetaData(FileObject.class)) {
+        fileInputPort.addPrecondition(
+                new SimplePrecondition(fileInputPort, new MetaData(FileObject.class)) {
 
             @Override
             protected boolean isMandatory() {
@@ -65,7 +68,7 @@ public class ReadText extends AbstractReader<Text> {
         types.add(type);
 
         type = new ParameterTypeFile(PARAMETER_FILE,
-                "Name of the text file", "txt",true);
+                "Path to the text file", "txt",true);
         type.setExpert(false);
         types.add(type);
         return types;
