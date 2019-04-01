@@ -1,5 +1,3 @@
-**Status:** Active (under active development, breaking changes may occur)
-
 ![](https://github.com/yunhaojohn/rapidminer-textminer/blob/master/src/main/resources/META-INF/icon.png) RapidMiner Textminer Extension
 ==============================
 
