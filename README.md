@@ -1,10 +1,11 @@
-![](https://github.com/yunhaojohn/rapidminer-textminer/blob/master/src/main/resources/META-INF/icon.png) RapidMiner Textminer Extension
+![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/META-INF/icon.png) RapidMiner Hanminer Extension
 ==============================
 
-The Textminer Extension for [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from programming in Chinese text processing & mining. Integrated in Rapidminer environment, Textminer provides a set of easy-to-use text mining tools and allows users to work in the intuitive graphical user interface of Rapidminer.
+The Hanminer Extension of [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from repeated programming in handling Chinese (Han language) processing & mining tasks such as keyword extraction, sentiment analysis and public opinion monitor. Integrated in Rapidminer environment, Hanminer provides a set of easy-to-use text mining tools and allows users to work in the intuitive graphical user interface of Rapidminer.
 
 ## Features
 
+* Input from text files or editor
 * Text preprocessing
   * Word segmentation
   * Stopwords filtering
@@ -26,9 +27,5 @@ The Textminer Extension for [RapidMiner](https://www.rapidminer.com) aims at fre
 4. On your project folder, execute in a terminal
 
    `./gradlew installExtension`
-5. Happy mining!
+5. Open Rapidminer Studio. Use operators from this extension to perform text mining tasks. Happy mining!
 
-## Acknowledgement
-
-1. [Rapidminer-studio](https://github.com/rapidminer/rapidminer-studio)
-2. [Hanlp](https://github.com/hankcs/HanLP)
