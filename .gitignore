@@ -14,3 +14,4 @@ config/pmd/ruleset.xml
 *.iml
 .checkstyle
 .pmd
+.DS_Store

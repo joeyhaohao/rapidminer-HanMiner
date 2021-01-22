@@ -1,7 +1,10 @@
-![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/META-INF/icon.png) RapidMiner Hanminer Extension
+![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/META-INF/icon.png) HanMiner Extension for RapidMiner  
 ==============================
 
-The Hanminer Extension of [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from repeated programming in handling Chinese (Han language) processing & mining tasks such as keyword extraction, sentiment analysis and public opinion monitor. Integrated in Rapidminer environment, Hanminer provides a set of easy-to-use text mining tools and allows users to work in the intuitive graphical user interface of Rapidminer.
+The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from repeated 
+programming in Chinese (Mandarin, or Han language) processing & text mining tasks such as keyword extraction, sentiment analysis 
+and public opinion monitor. Integrated in Rapidminer environment, Hanminer provides a set of easy-to-use text mining tools 
+and allows users to work in the intuitive graphical user interface of RapidMiner.
 
 ## Features
 

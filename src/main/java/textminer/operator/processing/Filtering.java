@@ -21,12 +21,12 @@ import java.util.stream.Collectors;
  * @author Joeyhaohao
  */
 
-public class FilterStopwords extends Operator {
+public class Filtering extends Operator {
 
     private InputPort textInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
-    public FilterStopwords(OperatorDescription description) {
+    public Filtering(OperatorDescription description) {
         super(description);
     }
 
@@ -37,9 +37,9 @@ public class FilterStopwords extends Operator {
         String result = new String();
         for (String text: textList){
             List<String> wordList = Arrays.asList(text.split(" "));
-            List<Term> termList = wordList.stream().map(word -> new Term(word,null)).collect(Collectors.toList());
+            List<Term> termList = wordList.stream().map(word -> new Term(word, null)).collect(Collectors.toList());
             CoreStopWordDictionary.apply(termList);
-            result += termList.toString().replaceAll("\\[|\\]|,","") + '\n';
+            result += termList.toString().replaceAll("\\[|\\]|,", "") + '\n';
         }
 
         PlainText resultObject = new PlainText(result);

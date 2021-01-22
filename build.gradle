@@ -16,7 +16,7 @@ repositories {
 extensionConfig {
 
     // The extension name
-    name 'Text Miner'
+    name 'HanMiner'
 
     /*
      * The artifact group which will be used when publishing the extensions Jar
@@ -24,7 +24,7 @@ extensionConfig {
      *
      * It is 'com.rapidminer.extension' by default.
      */
-    groupId = 'textminer'
+    groupId = 'com.rapidminer.extension'
 
     /*
      * The extension vendor which will be displayed in the extensions about box
@@ -32,7 +32,7 @@ extensionConfig {
      *
      * It is 'RapidMiner GmbH' by default.
      */
-    vendor = "yunhao"
+    vendor = "joeyhaohao"
 
     /*
      * The vendor homepage which will be displayed in the extensions about box
@@ -40,7 +40,7 @@ extensionConfig {
      *
      * It is 'www.rapidminer.com' by default.
      */
-//    homepage = "www.mi.com"
+    homepage = "www.rapidminer.com"
 
     // define RapidMiner version and extension dependencies
     dependencies {

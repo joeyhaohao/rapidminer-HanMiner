@@ -68,7 +68,7 @@ public class ReadText extends AbstractReader<Text> {
         types.add(type);
 
         type = new ParameterTypeFile(PARAMETER_FILE,
-                "Path to the text file", "txt",true);
+                "Path to the text file", "txt", true);
         type.setExpert(false);
         types.add(type);
         return types;
