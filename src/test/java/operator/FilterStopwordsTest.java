@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class FilterStopwordsTest {
+public class FilteringTest {
 
     @Test
     public void doWork() {
@@ -42,7 +42,7 @@ public class FilterStopwordsTest {
 
         //test3
 //        try {
-//            ClassLoader loader = FilterStopwords.class.getClassLoader();
+//            ClassLoader loader = Filtering.class.getClassLoader();
 //            URL totdURL = loader.getResource("stopwords");
 //            if (totdURL != null) {
 //                BufferedReader in = null;

@@ -1,4 +1,4 @@
-![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/META-INF/icon.png) HanMiner Extension for RapidMiner  
+![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/icons/hanminer.png) HanMiner Extension for RapidMiner  
 ==============================
 
 The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from repeated 
@@ -8,17 +8,15 @@ and allows users to work in the intuitive graphical user interface of RapidMiner
 
 ## Features
 
-* Input from text files or editor
-* Text preprocessing
+* Text reader/writer
+* Processing
   * Word segmentation
   * Stopwords filtering
-  * Word Count
 * Mining
+  * Word Count
   * Vectorizer
     * TfIdfVectorizer
     * Word2vec/Doc2Vec
-  * TextRank (in the future)
-  * Sentiment Analysis (in the future)
 
 ## Installation
 
@@ -26,7 +24,7 @@ and allows users to work in the intuitive graphical user interface of RapidMiner
 2. Install Java JDK 1.8 or higher
 3. Clone this repo
 
-   `git clone https://github.com/yunhaojohn/rapidminer-textminer.git`
+   `git clone https://github.com/yunhaojohn/rapidminer-HanMiner.git`
 4. On your project folder, execute in a terminal
 
    `./gradlew installExtension`
