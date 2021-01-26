@@ -25,8 +25,24 @@
         <name>Word Count</name>
     </operator>
     <operator>
-        <key>tfidf</key>
-        <name>TfIdf</name>
+        <key>count_vectorizer</key>
+        <name>Count Vectorizer</name>
+    </operator>
+    <operator>
+        <key>tfidf_vectorizer</key>
+        <name>TfIdf Vectorizer</name>
+    </operator>
+    <operator>
+        <key>doc2vec</key>
+        <name>Doc2vec</name>
+    </operator>
+    <operator>
+        <key>simplified_to_traditional</key>
+        <name>Simplified to Traditional</name>
+    </operator>
+    <operator>
+        <key>traditional_to_simplified</key>
+        <name>Traditional to Simplified</name>
     </operator>
     <operator>
         <key>doc2vec</key>
@@ -35,24 +51,24 @@
 
     <!-- This is how group keys are translated: -->
     <group>
-        <key>io</key>
-        <name>IO</name>
+        <key>data</key>
+        <name>Data</name>
     </group>
     <group>
         <key>processing</key>
         <name>Processing</name>
     </group>
     <group>
-        <key>mining</key>
-        <name>Mining</name>
+        <key>featureExtraction</key>
+        <name>FeatureExtraction</name>
     </group>
     <group>
-        <key>mining.vectorizer</key>
+        <key>featureExtraction.vectorizer</key>
         <name>Vectorizer</name>
     </group>
     <group>
-        <key>mining.word</key>
-        <name>Word</name>
+        <key>translation</key>
+        <name>Translation</name>
     </group>
 
 </operatorHelp>

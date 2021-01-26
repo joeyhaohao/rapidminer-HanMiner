@@ -16,7 +16,7 @@
             </operator>
         </group>
         <group key="data">
-            <icon>text_io.png</icon>
+            <icon>operator_io.png</icon>
             <operator>
                 <key>read_text</key>
                 <class>hanMiner.operator.data.ReadText</class>
@@ -27,7 +27,7 @@
             </operator>
         </group>
         <group key="processing">
-            <icon>text_processing.png</icon>
+            <icon>operator_processing.png</icon>
             <operator>
                 <key>tokenization</key>
                 <class>hanMiner.operator.processing.Tokenization</class>
@@ -37,24 +37,37 @@
                 <class>hanMiner.operator.processing.Filtering</class>
             </operator>
         </group>
-        <group key="mining">
-            <icon>text_mining.png</icon>
-            <group key="word">
-                <operator>
-                    <key>word_count</key>
-                    <class>hanMiner.operator.mining.word.WordCount</class>
-                </operator>
-            </group>
+        <group key="featureExtraction">
+            <icon>operator_featureExtraction.png</icon>
+            <operator>
+                <key>word_count</key>
+                <class>hanMiner.operator.featureExtraction.WordCount</class>
+            </operator>
             <group key="vectorizer">
                 <operator>
-                    <key>tfidf</key>
-                    <class>hanMiner.operator.mining.vectorizer.TfIdf</class>
+                    <key>count_vectorizer</key>
+                    <class>hanMiner.operator.featureExtraction.vectorizer.CountVectorizer</class>
+                </operator>
+                <operator>
+                    <key>tfidf_vectorizer</key>
+                    <class>hanMiner.operator.featureExtraction.vectorizer.TfIdfVectorizer</class>
                 </operator>
                 <operator>
                     <key>doc2vec</key>
-                    <class>hanMiner.operator.mining.vectorizer.Doc2vec</class>
+                    <class>hanMiner.operator.featureExtraction.vectorizer.Doc2vec</class>
                 </operator>
             </group>
+        </group>
+        <group key="translation">
+            <icon>operator_translation.png</icon>
+            <operator>
+                <key>simplified_to_traditional</key>
+                <class>hanMiner.operator.translation.SimplifiedToTraditional</class>
+            </operator>
+            <operator>
+                <key>traditional_to_simplified</key>
+                <class>hanMiner.operator.translation.TraditionalToSimplified</class>
+            </operator>
         </group>
     </group>
 </operators>

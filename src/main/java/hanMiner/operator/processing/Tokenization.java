@@ -1,7 +1,7 @@
 package hanMiner.operator.processing;
 
-import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.seg.common.Term;
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
@@ -32,6 +32,8 @@ public class Tokenization extends Operator {
     public void doWork() throws OperatorException {
         SimpleTextSet textSet = textInput.getData(SimpleTextSet.class);
         List<String> output = new ArrayList<>();
+
+
         for (String text: textSet.getExamples()){
             List<Term> segments = HanLP.segment(text);
             output.add(segments.toString().replaceAll("\\[|\\]|,",""));

@@ -51,9 +51,12 @@ public class Filtering extends Operator {
         types.add(type);
 
         type = new ParameterTypeFile(PARAMETER_STOPWORDS_FILE,
-                "Path to the stopwords dictionary", null, true);
-        type.setExpert(false);
+                "Path to the stopwords dictionary",
+                null,
+                true,
+                false);
         types.add(type);
+
         return types;
     }
 

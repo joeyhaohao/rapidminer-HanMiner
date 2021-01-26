@@ -7,12 +7,6 @@ buildscript {
 
 plugins { id 'com.rapidminer.extension' version '0.9.3' }
 
-// Define Maven artifact repositories
-repositories {
-    jcenter()
-	maven { url 'https://maven.rapidminer.com/content/groups/public/' }
-}
-
 extensionConfig {
     // The extension name
     name 'HanMiner'
@@ -46,6 +40,12 @@ extensionConfig {
         //rapidminer '8.2.0'
         //extension namespace: 'text', version: '8.1.0'
     }
+}
+
+// Define Maven artifact repositories
+repositories {
+    jcenter()
+    maven { url 'https://maven.rapidminer.com/content/groups/public/' }
 }
 
 // Define third party library dependencies

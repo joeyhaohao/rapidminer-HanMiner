@@ -1,4 +1,4 @@
-![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/icons/hanminer.png) HanMiner Extension for RapidMiner  
+![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/com/rapidminer/resources/icons/hanminer.png) HanMiner Extension for RapidMiner  
 ==============================
 
 The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from repeated 
@@ -12,12 +12,18 @@ and allows users to work in the intuitive graphical user interface of RapidMiner
 * Processing
   * Word segmentation
   * Stopwords filtering
-* Mining
+* FeatureExtraction
   * Word Count
   * Vectorizer
+    * CountVectorizer
     * TfIdfVectorizer
-    * Word2vec/Doc2Vec
-
+    * Doc2Vec
+* Translation
+  * Simplified Chinese to Traditional Chinese
+  * Traditional Chinese to Simplifies Chinese
+* Modeling
+  * Sentiment Analysis
+  
 ## Installation
 
 1. Install [RapidMiner Studio](https://rapidminer.com/get-started/)
