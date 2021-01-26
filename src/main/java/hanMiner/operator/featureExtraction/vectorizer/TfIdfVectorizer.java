@@ -43,7 +43,7 @@ public class TfIdfVectorizer extends Operator {
         ParameterType type = new ParameterTypeInt(
                 PARAMETER_MAX_FEATURES,
                 "This parameter specifies the max number of features in the result. " +
-                        "The vocabulary will be built by top max_features ordered by tf-idf value " +
+                        "The vocabulary will be built by top max_features ordered by term frequency " +
                         "across the corpus.",
                 1,
                 500,
@@ -85,9 +85,9 @@ public class TfIdfVectorizer extends Operator {
 
         for (Map.Entry<Object, Map<String, Double>> entry: tfIdf.compute().entrySet()) {
             Map<String, Double> tfIdfMap = entry.getValue();
-
             double[] doubleArray = new double[listOfAtts.size()];
             Arrays.fill(doubleArray, 0.0);
+
             for (String word: tfIdfMap.keySet()){
                 if (word2featureMap.containsKey(word)) {
                     int index = word2featureMap.get(word);

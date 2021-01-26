@@ -32,10 +32,16 @@
                 <key>tokenization</key>
                 <class>hanMiner.operator.processing.Tokenization</class>
             </operator>
-            <operator>
-                <key>filtering</key>
-                <class>hanMiner.operator.processing.Filtering</class>
-            </operator>
+            <group key="filtering">
+                <operator>
+                    <key>filter_stopwords</key>
+                    <class>hanMiner.operator.processing.Filtering.FilterStopwords</class>
+                </operator>
+                <operator>
+                    <key>filter_tokens</key>
+                    <class>hanMiner.operator.processing.Filtering.FilterTokens</class>
+                </operator>
+            </group>
         </group>
         <group key="featureExtraction">
             <icon>operator_featureExtraction.png</icon>

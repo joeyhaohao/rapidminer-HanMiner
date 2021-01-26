@@ -12,13 +12,18 @@
         <synopsis>This operator can write text to file.</synopsis>
     </operator>
     <operator>
-        <key>filtering</key>
-        <name>Filtering</name>
+        <key>tokenization</key>
+        <name>Tokenization</name>
+    </operator>
+    <operator>
+        <key>filter_stopwords</key>
+        <name>Filter Stopwords</name>
         <synopsis>This operator can filter stopwords in text.</synopsis>
     </operator>
     <operator>
-        <key>tokenization</key>
-        <name>Tokenization</name>
+        <key>filter_tokens</key>
+        <name>Filter Tokens</name>
+        <synopsis>This operator can filter custom tokens.</synopsis>
     </operator>
     <operator>
         <key>word_count</key>

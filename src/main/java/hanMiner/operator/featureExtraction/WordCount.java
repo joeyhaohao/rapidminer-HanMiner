@@ -10,6 +10,8 @@ import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.tools.Ontology;
 import hanMiner.text.SimpleTextSet;
+import hanMiner.text.TextSet;
+
 import java.util.*;
 
 /**
@@ -32,12 +34,8 @@ public class WordCount extends Operator {
     @Override
     public void doWork() throws OperatorException {
         SimpleTextSet textSet = textInput.getData(SimpleTextSet.class);
-        List<String> wordList = Arrays.asList(textSet.toString().split("\\s+"));
-        Map<String, Integer> counter = new HashMap<>();
-        for (String word: wordList) {
-            counter.put(word, counter.getOrDefault(word, 0) + 1);
-        }
-        SortedSet<Map.Entry<String, Integer>> sortedCounter = entriesSortedByValues(counter);
+        Map<String, Integer> wordCounter = wordCount(textSet);
+        SortedSet<Map.Entry<String, Integer>> sortedCounter = entriesSortedByValues(wordCounter);
 
         List<Attribute> listOfAtts = new LinkedList<>();
         Attribute newNominalAtt = AttributeFactory.createAttribute("Word",
@@ -64,7 +62,16 @@ public class WordCount extends Operator {
         exampleSetOutput.deliver(exampleSet);
     }
 
-    static <K,V extends Comparable<? super V>>
+    public static Map<String, Integer> wordCount(TextSet textSet) {
+        List<String> wordList = Arrays.asList(textSet.toString().split("\\s+"));
+        Map<String, Integer> wordCounter = new HashMap<>();
+        for (String word: wordList) {
+            wordCounter.put(word, wordCounter.getOrDefault(word, 0) + 1);
+        }
+        return wordCounter;
+    }
+
+    public static <K,V extends Comparable<? super V>>
     SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
         SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(
                 new Comparator<Map.Entry<K,V>>() {
