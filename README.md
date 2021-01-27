@@ -10,13 +10,15 @@ and allows users to work in the intuitive graphical user interface of RapidMiner
 
 * Text reader/writer
 * Processing
-  * Word segmentation
-  * Stopwords filtering
+  * Word segmentation(tokenization)
+  * Filtering
+    * Filter stopwords
+    * Filter tokens
 * FeatureExtraction
   * Word Count
   * Vectorizer
-    * CountVectorizer
-    * TfIdfVectorizer
+    * Count Vectorizer
+    * TfIdf Vectorizer
     * Doc2Vec
 * Translation
   * Simplified Chinese to Traditional Chinese

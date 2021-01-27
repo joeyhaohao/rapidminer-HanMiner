@@ -19,9 +19,9 @@ import java.util.*;
 
 /**
  *
- * This operator can vectorize a set of documents using tf-idf. Stopwords will be automatically
- * removed. The output is an n*m example set {@link ExampleSet}, where n is number of documents,
- * m is number of features). The result can be fed to training NLP models.
+ * This operator can vectorize a set of documents using TF-IDF. Stopwords will be
+ * removed. The output is an n*m example set {@link ExampleSet} (n: number of documents,
+ * m: number of features). The result can be fed into next-step NLP models.
  *
  * @author joeyhaohao
  */
@@ -30,7 +30,7 @@ public class TfIdfVectorizer extends Operator {
 
     private static final String PARAMETER_MAX_FEATURES = "max_features";
 
-    private InputPort textInput = getInputPorts().createPort("text");
+    private InputPort textSetInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public TfIdfVectorizer(OperatorDescription description) {
@@ -56,7 +56,7 @@ public class TfIdfVectorizer extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        TextSet textSet = textInput.getData(SimpleTextSet.class);
+        TextSet textSet = textSetInput.getData(SimpleTextSet.class);
         int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
 
         TfIdfCounter tfIdf = new TfIdfCounter(true);

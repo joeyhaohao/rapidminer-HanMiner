@@ -10,6 +10,7 @@ import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeBoolean;
 import com.rapidminer.parameter.ParameterTypeFile;
+import com.rapidminer.parameter.conditions.BooleanParameterCondition;
 import hanMiner.text.SimpleTextSet;
 
 import java.io.BufferedReader;
@@ -21,9 +22,9 @@ import java.util.stream.Collectors;
 
 /**
  *
- * This operator can be used to filter stopwords in text. The tokens should
- * be separated by white-space. The user can either use default stopwords list,
- * or load customized list from the file system.
+ * This operator can be used to filter stopwords in text. The tokens must be separated
+ * by white-space. The user can either use default stopwords dictionary, or load custom
+ * stopwords from file.
  *
  * @author joeyhaohao
  */
@@ -36,7 +37,7 @@ public class FilterStopwords extends Operator {
     private static final String PARAMETER_FILTER_NON_CHINESE_CHAR = "filter_non_chinese_character";
     private static final String PARAMETER_STOPWORDS_FILE = "stopwords_file";
 
-    private InputPort textInput = getInputPorts().createPort("text");
+    private InputPort textSetInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
 
     public FilterStopwords(OperatorDescription description) {
@@ -59,6 +60,11 @@ public class FilterStopwords extends Operator {
                 null,
                 true,
                 false);
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_LOAD_STOPWORDS_FROM_FILE,
+                        true,
+                        true));
         types.add(type);
 
         type = new ParameterTypeBoolean(
@@ -87,7 +93,7 @@ public class FilterStopwords extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        SimpleTextSet textSet = textInput.getData(SimpleTextSet.class);
+        SimpleTextSet textSet = textSetInput.getData(SimpleTextSet.class);
         List<String> output = new ArrayList<>();
         boolean use_custom = getParameterAsBoolean(PARAMETER_LOAD_STOPWORDS_FROM_FILE);
         boolean filter_punctuation = getParameterAsBoolean(PARAMETER_FILTER_PUNCTUATION);

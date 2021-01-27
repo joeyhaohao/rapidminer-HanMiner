@@ -4,54 +4,82 @@
     <operator>
         <key>read_text</key>
         <name>Read Text</name>
-        <synopsis>This operator can read/create text.</synopsis>
+        <synopsis>This operator reads text.</synopsis>
+        <help>This operator reads text. Users can either load text from files or create it in a text editor.
+            Each line is taken as an example. Empty lines will be removed.</help>
     </operator>
     <operator>
         <key>write_text</key>
         <name>Write Text</name>
-        <synopsis>This operator can write text to file.</synopsis>
+        <synopsis>This operator writes text to file.</synopsis>
+        <help>This operator writes text to file.</help>
     </operator>
     <operator>
         <key>tokenization</key>
         <name>Tokenization</name>
+        <synopsis>This operator segments Chinese sentences into words (tokens).</synopsis>
+        <help>This operator segments Chinese sentences into words (tokens).</help>
     </operator>
     <operator>
         <key>filter_stopwords</key>
         <name>Filter Stopwords</name>
-        <synopsis>This operator can filter stopwords in text.</synopsis>
+        <synopsis>This operator filters stopwords in text.</synopsis>
+        <help> This operator can be used to filter stopwords in text. The tokens must be separated
+            by white-space. The user can either use default stopwords dictionary, or load custom
+            stopwords from file.</help>
     </operator>
     <operator>
         <key>filter_tokens</key>
         <name>Filter Tokens</name>
-        <synopsis>This operator can filter custom tokens.</synopsis>
+        <synopsis>This operator filters custom strings in text.</synopsis>
+        <help>This operator filters custom strings in text.</help>
     </operator>
     <operator>
         <key>word_count</key>
         <name>Word Count</name>
+        <synopsis>This operator counts word occurrence and frequency in texts.</synopsis>
+        <help> This operator counts word occurrence and frequency in texts. The tokens
+            must be separated by one or more white spaces.</help>
     </operator>
     <operator>
         <key>count_vectorizer</key>
         <name>Count Vectorizer</name>
+        <synopsis>This operator transform documents into vectors using word count.</synopsis>
+        <help> This operator transforms documents into vectors using word count. The output
+            is an n*m example set (n: number of documents, m: number of features). The result
+            can be fed into next-step NLP models.</help>
     </operator>
     <operator>
         <key>tfidf_vectorizer</key>
         <name>TfIdf Vectorizer</name>
+        <synopsis>This operator transform documents into vectors using TF-IDF.</synopsis>
+        <help> This operator transforms documents into vectors using TF-IDF. Stopwords will
+            be removed. The output is an n*m example set (n: number of documents, m: number
+            of features). The result can be fed into next-step NLP models.</help>
     </operator>
     <operator>
         <key>doc2vec</key>
         <name>Doc2vec</name>
+        <synopsis>This operator transform documents into vectors using Doc2vec.</synopsis>
+        <help> This operator transform documents into vectors using Doc2vec. Users can
+            either load existing model or train a new model with default or custom corpus.
+            It can take a few minutes to train a new model at the first time. After training
+            is completed, the model will be cached, so that the performance will be much
+            faster if users want models with the same embedding size next time.
+            The output is an n*m example set (n: number of documents, m: embedding size).
+            The result can be fed into next-step NLP models.</help>
     </operator>
     <operator>
         <key>simplified_to_traditional</key>
         <name>Simplified to Traditional</name>
+        <synopsis>This operator transforms simplified Chinese to traditional Chinese.</synopsis>
+        <help>This operator transforms simplified Chinese to traditional Chinese.</help>
     </operator>
     <operator>
         <key>traditional_to_simplified</key>
         <name>Traditional to Simplified</name>
-    </operator>
-    <operator>
-        <key>doc2vec</key>
-        <name>Doc2vec</name>
+        <synopsis>This operator transforms traditional Chinese to simplified Chinese.</synopsis>
+        <help>This operator transforms traditional Chinese to simplified Chinese.</help>
     </operator>
 
     <!-- This is how group keys are translated: -->

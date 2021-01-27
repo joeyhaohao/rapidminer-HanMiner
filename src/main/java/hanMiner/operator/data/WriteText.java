@@ -24,7 +24,10 @@ public class WriteText extends AbstractWriter<TextSet> {
 
     public List<ParameterType> getParameterTypes() {
         List<ParameterType> types = new LinkedList();
-        types.add(new ParameterTypeFile(PARAMETER_TEXT_FILE, "File to save text to.", "txt", false));
+        types.add(new ParameterTypeFile(PARAMETER_TEXT_FILE,
+                "File to save text to.",
+                "txt",
+                false));
         types.addAll(super.getParameterTypes());
         return types;
     }

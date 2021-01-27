@@ -1,6 +1,5 @@
 package hanMiner.operator.featureExtraction.vectorizer;
 
-import com.hankcs.hanlp.mining.word.TfIdfCounter;
 import com.rapidminer.example.Attribute;
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.example.table.AttributeFactory;
@@ -21,10 +20,18 @@ import java.util.*;
 
 import static hanMiner.operator.featureExtraction.WordCount.wordCount;
 
+/**
+ *
+ * This operator transforms documents into vectors using word count. The output is
+ * an n*m example set {@link ExampleSet} (n: number of documents,
+ * m: number of features). The result can be fed into next-step NLP models.
+ *
+ * @author joeyhaohao
+ */
 public class CountVectorizer extends Operator {
     private static final String PARAMETER_MAX_FEATURES = "max_features";
 
-    private InputPort textInput = getInputPorts().createPort("text");
+    private InputPort textSetInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public CountVectorizer(OperatorDescription description) {
@@ -50,7 +57,7 @@ public class CountVectorizer extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        TextSet textSet = textInput.getData(SimpleTextSet.class);
+        TextSet textSet = textSetInput.getData(SimpleTextSet.class);
         int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
         // get word count across the corpus
         Map<String, Integer> wordCounter = wordCount(textSet);

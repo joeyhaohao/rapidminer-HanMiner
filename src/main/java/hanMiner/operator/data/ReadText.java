@@ -9,6 +9,7 @@ import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.metadata.MetaData;
 import com.rapidminer.operator.ports.metadata.SimplePrecondition;
 import com.rapidminer.parameter.*;
+import com.rapidminer.parameter.conditions.BooleanParameterCondition;
 import hanMiner.text.SimpleTextSet;
 import hanMiner.text.TextSet;
 
@@ -18,8 +19,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This operator can be used to create an {@link SimpleTextSet}. The user can load text
- * from .txt files, or create it in a text editor.
+ * This operator can be used to create an text set{@link SimpleTextSet}. Users can either
+ * load text from files or create it in a text editor. Each line is taken as an example.
+ * Empty lines will be removed.
  *
  * @author joeyhaohao
  */
@@ -53,7 +55,14 @@ public class ReadText extends AbstractReader<TextSet> {
     @Override
     public List<ParameterType> getParameterTypes() {
         List<ParameterType> types = super.getParameterTypes();
-        ParameterType type = new ParameterTypeText(
+        ParameterType type = new ParameterTypeBoolean(
+                PARAMETER_IMPORT_FROM_FILE,
+                "If set to true, import text from file. Otherwise, use text in the editor",
+                false,
+                false);
+        types.add(type);
+
+        type = new ParameterTypeText(
                 PARAMETER_TEXT,
                 "Text editor",
                 TextType.PLAIN,
@@ -61,18 +70,23 @@ public class ReadText extends AbstractReader<TextSet> {
         type.setExpert(false);
 //        type.setPrimary(true);
         type.setDefaultValue("This is a default text\n这是默认的文本");
-        types.add(type);
-
-        type = new ParameterTypeBoolean(
-                PARAMETER_IMPORT_FROM_FILE,
-                "If set to true, import text from file.",
-                false);
-        type.setExpert(false);
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_IMPORT_FROM_FILE,
+                        true,
+                        false));
         types.add(type);
 
         type = new ParameterTypeFile(PARAMETER_FILE,
-                "Path to the text file", "txt", true);
-        type.setExpert(false);
+                "Path to the text file",
+                "txt",
+                true,
+                false);
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_IMPORT_FROM_FILE,
+                        true,
+                        true));
         types.add(type);
         return types;
     }

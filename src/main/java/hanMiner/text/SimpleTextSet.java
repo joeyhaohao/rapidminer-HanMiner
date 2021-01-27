@@ -10,6 +10,7 @@ import java.lang.reflect.Constructor;
 import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.zip.GZIPOutputStream;
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.operator.IOObject;
@@ -36,7 +37,8 @@ public class SimpleTextSet extends ResultObjectAdapter implements TextSet {
      * Constructs a new Plaintext backed by the given document.
      */
     public SimpleTextSet(List<String> docs) {
-        this.docs = docs;
+        // remove empty line
+        this.docs = docs.stream().filter(line -> line.length() > 0).collect(Collectors.toList());
     }
 
     /** This method overrides the implementation of ResultObjectAdapter and returns "Text". */

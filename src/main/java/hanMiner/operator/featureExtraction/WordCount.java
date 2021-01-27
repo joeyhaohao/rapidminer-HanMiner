@@ -16,8 +16,8 @@ import java.util.*;
 
 /**
  *
- * This operator counts word occurrence and frequency in texts. The tokens
- * should be separated by white-space.
+ * This operator counts word occurrence and frequency in texts. The tokens must be separated
+ * by one or more white spaces.
  *
  * @author joeyhaohao
  */
