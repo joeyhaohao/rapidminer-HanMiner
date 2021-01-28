@@ -2,7 +2,6 @@ package hanMiner.operator.featureExtraction.vectorizer;
 
 import com.hankcs.hanlp.corpus.io.IOUtil;
 import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
-import com.hankcs.hanlp.mining.word2vec.Vector;
 import com.hankcs.hanlp.mining.word2vec.Word2VecTrainer;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
 import com.rapidminer.example.Attribute;
@@ -18,10 +17,9 @@ import com.rapidminer.operator.*;
 import com.rapidminer.parameter.*;
 import com.rapidminer.parameter.conditions.BooleanParameterCondition;
 import com.rapidminer.tools.Ontology;
-import hanMiner.text.SimpleTextSet;
-import hanMiner.text.TextSet;
+import hanMiner.text.SimpleDocumentSet;
+import hanMiner.text.DocumentSet;
 
-import javax.xml.soap.Text;
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
@@ -45,13 +43,13 @@ public class Doc2vec extends Operator{
     private static final String DEFAULT_MODEL_FILE_PREFIX = "data/model/word2vec/word2vec_";
     private static final String DEFAULT_CORPUS_FILE = "data/corpus/msr_training.utf8";
 
-    private InputPort textSetInput = getInputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public Doc2vec(OperatorDescription description) {
         super(description);
-        textSetInput.addPrecondition(
-                new SimplePrecondition(textSetInput, new MetaData(TextSet.class)) {
+        documentSetInput.addPrecondition(
+                new SimplePrecondition(documentSetInput, new MetaData(DocumentSet.class)) {
 
                     @Override
                     protected boolean isMandatory() {
@@ -112,7 +110,7 @@ public class Doc2vec extends Operator{
 
     @Override
     public void doWork() throws OperatorException {
-        TextSet textSet = textSetInput.getData(SimpleTextSet.class);
+        DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         boolean load_model_from_file = getParameterAsBoolean(PARAMETER_LOAD_MODEL_FROM_FILE);
         int embedding_size = getParameterAsInt(PARAMETER_EMBEDDING_SIZE);
 
@@ -127,7 +125,7 @@ public class Doc2vec extends Operator{
 
         WordVectorModel wordVectorModel = null;
         if (load_model_from_file) {
-            // use custom model from file
+            // Use custom model from file
             File model_file = getParameterAsFile(PARAMETER_MODEL_FILE);
             try {
                  wordVectorModel = new WordVectorModel(model_file.getAbsolutePath());
@@ -141,14 +139,14 @@ public class Doc2vec extends Operator{
             String corpus_file = getParameterAsString(PARAMETER_CORPUS_FILE);
 
             if (IOUtil.isFileExisted(model_file) && corpus_file == null) {
-                // load existing model
+                // Load existing model
                 try {
                     wordVectorModel = new WordVectorModel(model_file);
                 } catch (IOException e){
                     e.printStackTrace();
                 }
             } else {
-                // train and save a new model
+                // Train and save a new model. It can take a few minutes for the first time.
                 if (corpus_file == null) {
                     corpus_file = DEFAULT_CORPUS_FILE;
                 }
@@ -157,8 +155,8 @@ public class Doc2vec extends Operator{
         }
 
         DocVectorModel docVectorModel = new DocVectorModel(wordVectorModel);
-        for (String text: textSet.getExamples()) {
-            float[] array = docVectorModel.query(text).getElementArray();
+        for (String doc: documentSet.getDocuments()) {
+            float[] array = docVectorModel.query(doc).getElementArray();
             table.addDataRow(new FloatArrayDataRow(array));
         }
 

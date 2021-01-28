@@ -7,22 +7,21 @@ import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import hanMiner.text.SimpleTextSet;
+import hanMiner.text.SimpleDocumentSet;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This operator segments Chinese sentences into separate words. One sentence
- * takes one row. This means sentences should be separated by '\n'.
+ * This operator segments Chinese documents into words (tokens).
  *
  * @author joeyhaohao
  *
  */
 public class Tokenization extends Operator {
 
-    private InputPort textSetInput = getInputPorts().createPort("text");
-    private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("document set");
+    private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public Tokenization(OperatorDescription description) {
         super(description);
@@ -30,15 +29,15 @@ public class Tokenization extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        SimpleTextSet textSet = textSetInput.getData(SimpleTextSet.class);
+        SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         List<String> output = new ArrayList<>();
 
 
-        for (String text: textSet.getExamples()){
-            List<Term> segments = HanLP.segment(text);
+        for (String doc: documentSet.getDocuments()){
+            List<Term> segments = HanLP.segment(doc);
             output.add(segments.toString().replaceAll("\\[|\\]|,",""));
         }
-        SimpleTextSet resultObject = new SimpleTextSet(output);
+        SimpleDocumentSet resultObject = new SimpleDocumentSet(output);
         exampleSetOutput.deliver(resultObject);
     }
 }

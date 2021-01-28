@@ -6,8 +6,8 @@ import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
-import hanMiner.text.SimpleTextSet;
-import hanMiner.text.TextSet;
+import hanMiner.text.SimpleDocumentSet;
+import hanMiner.text.DocumentSet;
 
 import java.util.*;
 
@@ -20,8 +20,8 @@ import java.util.*;
 
 public class SimplifiedToTraditional extends Operator {
 
-    private InputPort textSetInput = getInputPorts().createPort("text");
-    private OutputPort textSetOutput = getOutputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("document set");
+    private OutputPort documentSetOutput = getOutputPorts().createPort("document set");
 
     public SimplifiedToTraditional(OperatorDescription description) {
         super(description);
@@ -29,13 +29,13 @@ public class SimplifiedToTraditional extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        TextSet textSet = textSetInput.getData(SimpleTextSet.class);
+        DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         List<String> output = new ArrayList<>();
 
-        for (String text: textSet.getExamples()) {
-            output.add(HanLP.convertToTraditionalChinese(text));
+        for (String doc: documentSet.getDocuments()) {
+            output.add(HanLP.convertToTraditionalChinese(doc));
         }
 
-        textSetOutput.deliver(new SimpleTextSet(output));
+        documentSetOutput.deliver(new SimpleDocumentSet(output));
     }
 }

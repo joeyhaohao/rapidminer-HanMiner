@@ -12,8 +12,8 @@ import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeInt;
 import com.rapidminer.tools.Ontology;
-import hanMiner.text.SimpleTextSet;
-import hanMiner.text.TextSet;
+import hanMiner.text.SimpleDocumentSet;
+import hanMiner.text.DocumentSet;
 
 import java.util.*;
 
@@ -30,7 +30,7 @@ public class TfIdfVectorizer extends Operator {
 
     private static final String PARAMETER_MAX_FEATURES = "max_features";
 
-    private InputPort textSetInput = getInputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("text");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public TfIdfVectorizer(OperatorDescription description) {
@@ -56,15 +56,15 @@ public class TfIdfVectorizer extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        TextSet textSet = textSetInput.getData(SimpleTextSet.class);
+        DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
 
         TfIdfCounter tfIdf = new TfIdfCounter(true);
-        for (int i = 0; i < textSet.size(); i++) {
-            tfIdf.add(i, textSet.getExample(i));
+        for (int i = 0; i < documentSet.size(); i++) {
+            tfIdf.add(i, documentSet.getDocument(i));
         }
 
-        // clip max number of features ordered by tf
+        // Clip max number of features ordered by term frequency
         int featureNum = Math.min(tfIdf.allTf().size(), maxFeatureNum);
         List<Map.Entry<String, Double>> allTf = tfIdf.sortedAllTf().subList(0, featureNum);
         HashMap<String, Integer> word2featureMap = new HashMap<>();
@@ -73,7 +73,7 @@ public class TfIdfVectorizer extends Operator {
             word2featureMap.put(tf.getKey(), ind++);
         }
 
-        // create new example set of vectors
+        // Create new example set of vectors
         List<Attribute> listOfAtts = new LinkedList<>();
         for (int i = 0; i < featureNum; i++) {
             Attribute newNumericalAtt = AttributeFactory.createAttribute(

@@ -9,21 +9,16 @@
                 <key>test_operator</key>
                 <class>hanMiner.operator.TestOperator</class>
             </operator>
-            <operator>
-                <deprecatedSince>0.1.0</deprecatedSince>
-                <key>create_text</key>
-                <class>hanMiner.operator.data.CreateText</class>
-            </operator>
         </group>
         <group key="data">
             <icon>operator_io.png</icon>
             <operator>
-                <key>read_text</key>
-                <class>hanMiner.operator.data.ReadText</class>
+                <key>read_document</key>
+                <class>hanMiner.operator.data.ReadDocument</class>
             </operator>
             <operator>
-                <key>write_text</key>
-                <class>hanMiner.operator.data.WriteText</class>
+                <key>write_document</key>
+                <class>hanMiner.operator.data.WriteDocument</class>
             </operator>
         </group>
         <group key="processing">
@@ -40,6 +35,10 @@
                 <operator>
                     <key>filter_tokens</key>
                     <class>hanMiner.operator.processing.Filtering.FilterTokens</class>
+                </operator>
+                <operator>
+                    <key>filter_documents</key>
+                    <class>hanMiner.operator.processing.Filtering.FilterDocuments</class>
                 </operator>
             </group>
         </group>

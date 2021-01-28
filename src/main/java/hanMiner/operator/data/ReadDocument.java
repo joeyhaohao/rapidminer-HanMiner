@@ -10,8 +10,8 @@ import com.rapidminer.operator.ports.metadata.MetaData;
 import com.rapidminer.operator.ports.metadata.SimplePrecondition;
 import com.rapidminer.parameter.*;
 import com.rapidminer.parameter.conditions.BooleanParameterCondition;
-import hanMiner.text.SimpleTextSet;
-import hanMiner.text.TextSet;
+import hanMiner.text.SimpleDocumentSet;
+import hanMiner.text.DocumentSet;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,13 +19,13 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This operator can be used to create an text set{@link SimpleTextSet}. Users can either
- * load text from files or create it in a text editor. Each line is taken as an example.
- * Empty lines will be removed.
+ * This operator can be used to create an document set{@link SimpleDocumentSet}. Users can
+ * either load text from files or create it in a text editor. Each line of the text is taken
+ * as an document. Empty lines will be removed.
  *
  * @author joeyhaohao
  */
-public class ReadText extends AbstractReader<TextSet> {
+public class ReadDocument extends AbstractReader<DocumentSet> {
 
     public static final String PARAMETER_TEXT = "text";
     public static final String PARAMETER_FILE = "file";
@@ -37,11 +37,11 @@ public class ReadText extends AbstractReader<TextSet> {
 
     static {
         AbstractReader.registerReaderDescription(
-                new AbstractReader.ReaderDescription("txt", ReadText.class, PARAMETER_FILE));
+                new AbstractReader.ReaderDescription("txt", ReadDocument.class, PARAMETER_FILE));
     }
 
-    public ReadText(final OperatorDescription description) {
-        super(description, TextSet.class);
+    public ReadDocument(final OperatorDescription description) {
+        super(description, DocumentSet.class);
         fileInputPort.addPrecondition(
                 new SimplePrecondition(fileInputPort, new MetaData(FileObject.class)) {
 
@@ -104,9 +104,9 @@ public class ReadText extends AbstractReader<TextSet> {
         return true;
     }
 
-    /** Read document from file **/
-    public TextSet readDocument() throws OperatorException{
-        List<String> textSet = new ArrayList<>();
+    /** Read documents from file **/
+    public DocumentSet readDocument() throws OperatorException{
+        List<String> documentSet = new ArrayList<>();
         File file = getParameterAsFile(PARAMETER_FILE);
         try {
             InputStreamReader reader = new InputStreamReader(
@@ -114,24 +114,24 @@ public class ReadText extends AbstractReader<TextSet> {
             BufferedReader br = new BufferedReader(reader);
             String line;
             while ((line = br.readLine()) != null) {
-                textSet.add(line);
+                documentSet.add(line);
             }
         } catch (Exception e) {
             e.printStackTrace();
-            textSet.add(e.getMessage());
+            documentSet.add(e.getMessage());
         }
 
-        return new SimpleTextSet(textSet);
+        return new SimpleDocumentSet(documentSet);
     }
 
-    /** Creat document from the editor **/
-    public TextSet createDocument() throws OperatorException {
+    /** Creat documents from the editor **/
+    public DocumentSet createDocument() throws OperatorException {
         String text = getParameterAsString(PARAMETER_TEXT);
-        return new SimpleTextSet(Arrays.asList(text.split("\n")));
+        return new SimpleDocumentSet(Arrays.asList(text.split("\n")));
     }
 
     @Override
-    public TextSet read() throws OperatorException {
+    public DocumentSet read() throws OperatorException {
         boolean import_from_file = getParameterAsBoolean(PARAMETER_IMPORT_FROM_FILE);
         if (import_from_file) {
             return readDocument();

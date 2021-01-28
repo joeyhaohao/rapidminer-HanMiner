@@ -11,14 +11,13 @@ import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.zip.GZIPOutputStream;
-import com.rapidminer.example.ExampleSet;
+
 import com.rapidminer.operator.IOObject;
 import com.rapidminer.operator.ResultObjectAdapter;
 
 
 /**
- * Implements wrapper methods of abstract text. Implements all ResultObject methods.<br>
+ * Implements wrapper methods of DocumentSet. Implements all ResultObject methods.<br>
  *
  * Apart from the interface methods the implementing classes must have a public single argument
  * clone constructor. This constructor is invoked by reflection from the clone method. Do not forget
@@ -26,62 +25,62 @@ import com.rapidminer.operator.ResultObjectAdapter;
  *
  * @author joeyhaohao
  */
-public class SimpleTextSet extends ResultObjectAdapter implements TextSet {
+public class SimpleDocumentSet extends ResultObjectAdapter implements DocumentSet {
 
     private static final long serialVersionUID = 8596141056047402798L;
 
-    /** The document used for reading the texts from. */
-    private List<String> docs;
+    /** List of documents. */
+    private List<String> documents;
 
     /**
-     * Constructs a new Plaintext backed by the given document.
+     * Constructs a new SimpleDocSet backed by the given document.
      */
-    public SimpleTextSet(List<String> docs) {
+    public SimpleDocumentSet(List<String> docs) {
         // remove empty line
-        this.docs = docs.stream().filter(line -> line.length() > 0).collect(Collectors.toList());
+        this.documents = docs.stream().filter(line -> line.length() > 0).collect(Collectors.toList());
     }
 
-    /** This method overrides the implementation of ResultObjectAdapter and returns "Text". */
+    /** This method overrides the implementation of ResultObjectAdapter and returns "DocumentSet". */
     @Override
     public String getName() {
-        return "TextSet";
+        return "DocumentSet";
     }
 
     /** Counts the length of document. */
     @Override
     public int size() {
-        return docs.size();
+        return documents.size();
     }
 
     /**
-     * Returns the list of text examples.
+     * Returns the list of documents.
      */
-    public List<String> getExamples() {
-        return docs;
+    public List<String> getDocuments() {
+        return documents;
     }
 
     /**
-     * Returns the i-th example.
+     * Returns the i-th document.
      */
-    public String getExample(int index) {
-        return docs.get(index);
+    public String getDocument(int index) {
+        return documents.get(index);
     };
 
     // --- Visualisation and toString() methods ---
 
     @Override
     public String toString() {
-        return String.join("\n", docs);
+        return String.join("\n", documents);
     }
 
     // -------------------- File Writing --------------------
     @Override
-    public void writeDataFile(File dataFile, Charset encoding) throws IOException {
+    public void writeDocumentFile(File dataFile, Charset encoding) throws IOException {
         try (OutputStream outStream = new FileOutputStream(dataFile);
              OutputStreamWriter osw = new OutputStreamWriter(outStream, encoding);
              PrintWriter out = new PrintWriter(osw)) {
-            for (String text : docs) {
-                out.println(text);
+            for (String doc : documents) {
+                out.println(doc);
             }
         }
     }
@@ -90,26 +89,22 @@ public class SimpleTextSet extends ResultObjectAdapter implements TextSet {
         return "txt";
     }
 
-    public String getFileDescription() {
-        return "attribute description file";
-    }
-
     /**
      * Returns true, if all documents are equal.
      */
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof TextSet)) {
+        if (!(o instanceof DocumentSet)) {
             return false;
         }
-        TextSet ts = (TextSet) o;
+        DocumentSet ts = (DocumentSet) o;
         return toString().equals(ts.toString());
     }
 
-    /** Returns the hash code of the text. */
+    /** Returns the hash code of the documents. */
     @Override
     public int hashCode() {
-        return docs.hashCode();
+        return documents.hashCode();
     }
 
     @Override
@@ -121,11 +116,11 @@ public class SimpleTextSet extends ResultObjectAdapter implements TextSet {
      * Clones the text by invoking a single argument clone constructor.
      */
     @Override
-    public TextSet clone() {
+    public DocumentSet clone() {
         try {
-            Class<? extends SimpleTextSet> clazz = getClass();
-            Constructor<? extends SimpleTextSet> cloneConstructor = clazz.getConstructor(new Class[] { clazz });
-            SimpleTextSet result = cloneConstructor.newInstance(new Object[] { this });
+            Class<? extends SimpleDocumentSet> clazz = getClass();
+            Constructor<? extends SimpleDocumentSet> cloneConstructor = clazz.getConstructor(new Class[] { clazz });
+            SimpleDocumentSet result = cloneConstructor.newInstance(new Object[] { this });
             return result;
         } catch (IllegalAccessException e) {
             throw new RuntimeException("Cannot clone Text: " + e.getMessage());
@@ -141,7 +136,7 @@ public class SimpleTextSet extends ResultObjectAdapter implements TextSet {
 
     @Override
     public Iterator<String> iterator() {
-        return docs.iterator();
+        return documents.iterator();
     }
 
 

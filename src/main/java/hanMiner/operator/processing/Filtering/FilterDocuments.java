@@ -12,20 +12,17 @@ import com.rapidminer.parameter.ParameterTypeString;
 import hanMiner.text.SimpleDocumentSet;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
- * This operator filters tokens in text. Only tokens match the condition will be
+ * This operator filters documents. Only documents match the condition will be
  * kept in the output.
  *
  * @author joeyhaohao
  */
-public class FilterTokens extends Operator {
+public class FilterDocuments extends Operator {
     public static final String PARAMETER_CONDITION = "condition";
     public static final String PARAMETER_USE_REGEX = "use_regular_expression";
     public static final String PARAMETER_EXPR = "expression";
@@ -37,7 +34,7 @@ public class FilterTokens extends Operator {
     private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort documentSetOutput = getOutputPorts().createPort("document set");
 
-    public FilterTokens(OperatorDescription description) {
+    public FilterDocuments(OperatorDescription description) {
         super(description);
     }
 
@@ -60,7 +57,7 @@ public class FilterTokens extends Operator {
         type = new ParameterTypeBoolean(PARAMETER_USE_REGEX,
                 "If set to true, match regular expression. Otherwise, match words.",
                 false,
-        false);
+                false);
         types.add(type);
 
         type = new ParameterTypeString(PARAMETER_EXPR,
@@ -79,31 +76,25 @@ public class FilterTokens extends Operator {
         boolean use_regex = getParameterAsBoolean(PARAMETER_USE_REGEX);
         String expr = getParameterAsString(PARAMETER_EXPR);
         List<String> output = new ArrayList<>();
+        boolean condition_satisfied = false;
         for (String doc: documentSet.getDocuments()){
-            Stream<String> wordStream = Arrays.asList(doc.split("\\s+")).stream();
             switch (getParameterAsInt(PARAMETER_CONDITION)) {
                 case CONDITION_MATCHES:
                     if (use_regex) {
-                        wordStream = wordStream.filter(
-                                word -> word.matches(expr) ^ inverse_condition
-                        );
+                        condition_satisfied = doc.matches(expr);
                     } else {
-                        wordStream = wordStream.filter(
-                                word -> word.equals(expr) ^ inverse_condition
-                        );
+                        condition_satisfied = doc.equals(expr);
                     }
                 case CONDITION_CONTAINS:
                     if (use_regex) {
-                        wordStream = wordStream.filter(
-                                word ->Pattern.compile(expr).matcher(word).find() ^ inverse_condition
-                        );
+                        condition_satisfied = Pattern.compile(expr).matcher(doc).find();
                     } else {
-                        wordStream = wordStream.filter(
-                                word -> word.contains(expr) ^ inverse_condition
-                        );
+                        condition_satisfied = doc.contains(expr);
                     }
             }
-            output.add(String.join(" ", wordStream.collect(Collectors.toList())));
+            if (condition_satisfied ^ inverse_condition) {
+                output.add(doc);
+            }
         }
 
         documentSetOutput.deliver(new SimpleDocumentSet(output));

@@ -28,18 +28,18 @@ import com.rapidminer.operator.ResultObject;
 
 
 /**
- * Interface definition for text.
+ * Interface definition for document set.
  *
  * @author joeyhaohao
  */
-public interface TextSet extends ResultObject, Cloneable, Iterable<String> {
+public interface DocumentSet extends ResultObject, Cloneable, Iterable<String> {
 
     /** necessary since default method was added */
     static final long serialVersionUID = 4100925167567270064L;
 
     // ------------- Misc -----------------------------
 
-    /** Clones the Text. */
+    /** Clones the document set. */
     public Object clone();
 
 
@@ -58,25 +58,23 @@ public interface TextSet extends ResultObject, Cloneable, Iterable<String> {
     }
 
     /**
-     * Returns the number of examples (i.e. lines) in the text. This number should not be used to create
-     * for-loops to iterate through all examples.
+     * Returns the number of documents, which is equal to the number of lines in the documents.
      */
     public int size();
 
     /**
-     * Returns the list of text examples.
+     * Returns the list of documents.
      */
-    public List<String> getExamples();
+    public List<String> getDocuments();
 
     /**
-     * Returns the i-th example.
+     * Returns the i-th document.
      */
-    public String getExample(int index);
+    public String getDocument(int index);
 
     // -------------------- File Writing --------------------
 
-    /** Writes the data and the attribute description to a file. */
-    public void writeDataFile(File dataFile, Charset encoding) throws IOException;
-
+    /** Writes the documents to a file. */
+    public void writeDocumentFile(File dataFile, Charset encoding) throws IOException;
 
 }

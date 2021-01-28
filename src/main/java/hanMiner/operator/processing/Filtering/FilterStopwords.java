@@ -11,7 +11,7 @@ import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeBoolean;
 import com.rapidminer.parameter.ParameterTypeFile;
 import com.rapidminer.parameter.conditions.BooleanParameterCondition;
-import hanMiner.text.SimpleTextSet;
+import hanMiner.text.SimpleDocumentSet;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,9 +22,9 @@ import java.util.stream.Collectors;
 
 /**
  *
- * This operator can be used to filter stopwords in text. The tokens must be separated
- * by white-space. The user can either use default stopwords dictionary, or load custom
- * stopwords from file.
+ * This operator can be used to remove stopwords in text. Tokens must be separated
+ * by one or more whitespaces. Users can either use default stopwords dictionary, or
+ * load custom stopwords from file.
  *
  * @author joeyhaohao
  */
@@ -37,8 +37,8 @@ public class FilterStopwords extends Operator {
     private static final String PARAMETER_FILTER_NON_CHINESE_CHAR = "filter_non_chinese_character";
     private static final String PARAMETER_STOPWORDS_FILE = "stopwords_file";
 
-    private InputPort textSetInput = getInputPorts().createPort("text");
-    private OutputPort exampleSetOutput = getOutputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("document set");
+    private OutputPort documentSetOutput = getOutputPorts().createPort("document set");
 
     public FilterStopwords(OperatorDescription description) {
         super(description);
@@ -93,23 +93,23 @@ public class FilterStopwords extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        SimpleTextSet textSet = textSetInput.getData(SimpleTextSet.class);
+        SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         List<String> output = new ArrayList<>();
         boolean use_custom = getParameterAsBoolean(PARAMETER_LOAD_STOPWORDS_FROM_FILE);
         boolean filter_punctuation = getParameterAsBoolean(PARAMETER_FILTER_PUNCTUATION);
         boolean filter_number = getParameterAsBoolean(PARAMETER_FILTER_NUMBER);
         boolean filter_non_chinese = getParameterAsBoolean(PARAMETER_FILTER_NON_CHINESE_CHAR);
-        for (String text: textSet.getExamples()){
+        for (String doc: documentSet.getDocuments()){
             if (filter_punctuation) {
-                text = text.replaceAll("\\p{P}", "");
+                doc = doc.replaceAll("\\p{P}", "");
             }
             if (filter_number) {
-                text = text.replaceAll("[0-9]", "");
+                doc = doc.replaceAll("[0-9]", "");
             }
             if (filter_non_chinese) {
-                text = text.replaceAll("[^\\u4e00-\\u9fa5|\\s]", "");
+                doc = doc.replaceAll("[^\\u4e00-\\u9fa5|\\s]", "");
             }
-            List<String> wordList = Arrays.asList(text.split("\\s+"));
+            List<String> wordList = Arrays.asList(doc.split("\\s+"));
             if (!use_custom){
                 // filter default stopwords
                 List<Term> termList = wordList.stream().map(word -> new Term(word, null)).collect(Collectors.toList());
@@ -137,6 +137,6 @@ public class FilterStopwords extends Operator {
             }
         }
 
-        exampleSetOutput.deliver(new SimpleTextSet(output));
+        documentSetOutput.deliver(new SimpleDocumentSet(output));
     }
 }

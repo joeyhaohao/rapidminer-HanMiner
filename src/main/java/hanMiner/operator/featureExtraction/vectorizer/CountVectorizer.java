@@ -13,8 +13,8 @@ import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeInt;
 import com.rapidminer.tools.Ontology;
-import hanMiner.text.SimpleTextSet;
-import hanMiner.text.TextSet;
+import hanMiner.text.SimpleDocumentSet;
+import hanMiner.text.DocumentSet;
 
 import java.util.*;
 
@@ -23,15 +23,15 @@ import static hanMiner.operator.featureExtraction.WordCount.wordCount;
 /**
  *
  * This operator transforms documents into vectors using word count. The output is
- * an n*m example set {@link ExampleSet} (n: number of documents,
- * m: number of features). The result can be fed into next-step NLP models.
+ * an n*m example set {@link ExampleSet} (n: number of documents, m: number of features).
+ * The result can be fed into next-step NLP models.
  *
  * @author joeyhaohao
  */
 public class CountVectorizer extends Operator {
     private static final String PARAMETER_MAX_FEATURES = "max_features";
 
-    private InputPort textSetInput = getInputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public CountVectorizer(OperatorDescription description) {
@@ -44,8 +44,8 @@ public class CountVectorizer extends Operator {
         ParameterType type = new ParameterTypeInt(
                 PARAMETER_MAX_FEATURES,
                 "This parameter specifies the max number of features in the result. " +
-                        "The vocabulary will be built by top max_features ordered by term frequency " +
-                        "across the corpus.",
+                        "The vocabulary will be built on top max_features terms ordered by their " +
+                        "frequency across the corpus.",
                 1,
                 500,
                 100,
@@ -57,10 +57,10 @@ public class CountVectorizer extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        TextSet textSet = textSetInput.getData(SimpleTextSet.class);
+        DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
         // get word count across the corpus
-        Map<String, Integer> wordCounter = wordCount(textSet);
+        Map<String, Integer> wordCounter = wordCount(documentSet);
         int featureNum = Math.min(wordCounter.size(), maxFeatureNum);
         PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>((a, b) -> (a.getValue() - b.getValue()));
         for (Map.Entry<String, Integer> entry: wordCounter.entrySet()) {
@@ -87,11 +87,11 @@ public class CountVectorizer extends Operator {
         }
         MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
 
-        for (String text: textSet.getExamples()) {
+        for (String doc: documentSet.getDocuments()) {
             double[] doubleArray = new double[listOfAtts.size()];
             Arrays.fill(doubleArray, 0.0);
 
-            for (String word: text.split("\\s+")){
+            for (String word: doc.split("\\s+")){
                 if (word2featureMap.containsKey(word)) {
                     int index = word2featureMap.get(word);
                     doubleArray[index] = wordCounter.get(word);

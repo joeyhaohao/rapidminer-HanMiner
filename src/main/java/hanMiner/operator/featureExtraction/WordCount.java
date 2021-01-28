@@ -9,14 +9,14 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.tools.Ontology;
-import hanMiner.text.SimpleTextSet;
-import hanMiner.text.TextSet;
+import hanMiner.text.SimpleDocumentSet;
+import hanMiner.text.DocumentSet;
 
 import java.util.*;
 
 /**
  *
- * This operator counts word occurrence and frequency in texts. The tokens must be separated
+ * This operator counts word occurrence and frequency in documents. The tokens must be separated
  * by one or more white spaces.
  *
  * @author joeyhaohao
@@ -24,7 +24,7 @@ import java.util.*;
 
 public class WordCount extends Operator {
 
-    private InputPort textInput = getInputPorts().createPort("text");
+    private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
     public WordCount(OperatorDescription description) {
@@ -33,8 +33,8 @@ public class WordCount extends Operator {
 
     @Override
     public void doWork() throws OperatorException {
-        SimpleTextSet textSet = textInput.getData(SimpleTextSet.class);
-        Map<String, Integer> wordCounter = wordCount(textSet);
+        SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
+        Map<String, Integer> wordCounter = wordCount(documentSet);
         SortedSet<Map.Entry<String, Integer>> sortedCounter = entriesSortedByValues(wordCounter);
 
         List<Attribute> listOfAtts = new LinkedList<>();
@@ -62,8 +62,8 @@ public class WordCount extends Operator {
         exampleSetOutput.deliver(exampleSet);
     }
 
-    public static Map<String, Integer> wordCount(TextSet textSet) {
-        List<String> wordList = Arrays.asList(textSet.toString().split("\\s+"));
+    public static Map<String, Integer> wordCount(DocumentSet documentSet) {
+        List<String> wordList = Arrays.asList(documentSet.toString().split("\\s+"));
         Map<String, Integer> wordCounter = new HashMap<>();
         for (String word: wordList) {
             wordCounter.put(word, wordCounter.getOrDefault(word, 0) + 1);
@@ -71,6 +71,7 @@ public class WordCount extends Operator {
         return wordCounter;
     }
 
+    // Sort a hash map by value
     public static <K,V extends Comparable<? super V>>
     SortedSet<Map.Entry<K,V>> entriesSortedByValues(Map<K,V> map) {
         SortedSet<Map.Entry<K,V>> sortedEntries = new TreeSet<Map.Entry<K,V>>(

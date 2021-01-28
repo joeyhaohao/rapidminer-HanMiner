@@ -14,6 +14,7 @@ and allows users to work in the intuitive graphical user interface of RapidMiner
   * Filtering
     * Filter stopwords
     * Filter tokens
+    * Filter documents
 * FeatureExtraction
   * Word Count
   * Vectorizer
