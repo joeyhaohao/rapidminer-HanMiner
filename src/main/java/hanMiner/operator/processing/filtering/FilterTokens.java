@@ -1,4 +1,4 @@
-package hanMiner.operator.processing.Filtering;
+package hanMiner.operator.processing.filtering;
 
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;

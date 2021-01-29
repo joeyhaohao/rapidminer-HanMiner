@@ -63,7 +63,7 @@ public class Doc2vec extends Operator{
         List<ParameterType> types = super.getParameterTypes();
         ParameterType type = new ParameterTypeBoolean(
                 PARAMETER_LOAD_MODEL_FROM_FILE,
-                "If set to true, load a word2vec model from file. Otherwise, use default model",
+                "If set to true, load a pre-trained word2vec model from file. Otherwise, use default model",
                 false,
                 false);
         types.add(type);
@@ -114,15 +114,6 @@ public class Doc2vec extends Operator{
         boolean load_model_from_file = getParameterAsBoolean(PARAMETER_LOAD_MODEL_FROM_FILE);
         int embedding_size = getParameterAsInt(PARAMETER_EMBEDDING_SIZE);
 
-        List<Attribute> listOfAtts = new LinkedList<>();
-        for (int i = 0; i < embedding_size; i++) {
-            Attribute newNumericalAtt = AttributeFactory.createAttribute(
-                    "feature_" + i,
-                    Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
-            listOfAtts.add(newNumericalAtt);
-        }
-        MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
-
         WordVectorModel wordVectorModel = null;
         if (load_model_from_file) {
             // Use custom model from file
@@ -139,7 +130,7 @@ public class Doc2vec extends Operator{
             String corpus_file = getParameterAsString(PARAMETER_CORPUS_FILE);
 
             if (IOUtil.isFileExisted(model_file) && corpus_file == null) {
-                // Load existing model
+                // Load an existing model
                 try {
                     wordVectorModel = new WordVectorModel(model_file);
                 } catch (IOException e){
@@ -153,8 +144,16 @@ public class Doc2vec extends Operator{
                 wordVectorModel = trainerBuilder.train(corpus_file, model_file);
             }
         }
-
         DocVectorModel docVectorModel = new DocVectorModel(wordVectorModel);
+
+        List<Attribute> listOfAtts = new LinkedList<>();
+        for (int i = 0; i < embedding_size; i++) {
+            Attribute newNumericalAtt = AttributeFactory.createAttribute(
+                    "Feature_" + i,
+                    Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
+            listOfAtts.add(newNumericalAtt);
+        }
+        MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
         for (String doc: documentSet.getDocuments()) {
             float[] array = docVectorModel.query(doc).getElementArray();
             table.addDataRow(new FloatArrayDataRow(array));

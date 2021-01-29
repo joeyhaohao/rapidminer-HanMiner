@@ -1,32 +1,40 @@
 ![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/com/rapidminer/resources/icons/hanminer.png) HanMiner Extension for RapidMiner  
 ==============================
 
-The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) aims at freeing data analysts/scientists from repeated 
-programming in Chinese (Mandarin, or Han language) processing & text mining tasks such as keyword extraction, sentiment analysis 
-and public opinion monitor. Integrated in Rapidminer environment, Hanminer provides a set of easy-to-use text mining tools 
-and allows users to work in the intuitive graphical user interface of RapidMiner.
+No programming knowledge required for Chinese text mining! The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) 
+provides a set of easy-to-use tools to perform Chinese Mandarin (or Han language) text processing/mining tasks such as 
+tokenization, document vectorization, keywords extraction and sentiment analysis, in graphical interface of RapidMiner. 
+It frees researchers/data analysts/scientists with limited background in language programming from coding in text mining. 
+Simply drag and connect operators in your process at [Rapidminer studio](https://rapidminer.com/products/studio/) and 
+run your tasks!
 
 ## Features
 
-* Text reader/writer
+* Document reader/writer
 * Processing
-  * Word segmentation(tokenization)
+  * Word segmentation (tokenization)
   * Filtering
     * Filter stopwords
     * Filter tokens
     * Filter documents
 * FeatureExtraction
   * Word Count
+  * Keyword extraction
   * Vectorizer
     * Count Vectorizer
     * TfIdf Vectorizer
     * Doc2Vec
+* Analyzing
+  * Part-of-Speech (POS) Tagging
+  * Name Entity Recognition
+  * Dependency parsing
 * Translation
   * Simplified Chinese to Traditional Chinese
   * Traditional Chinese to Simplifies Chinese
-* Modeling
-  * Sentiment Analysis
-  
+* Classification
+    * Document classification
+    * Sentiment Analysis
+
 ## Installation
 
 1. Install [RapidMiner Studio](https://rapidminer.com/get-started/)

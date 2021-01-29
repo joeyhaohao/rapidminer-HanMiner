@@ -18,12 +18,12 @@ import java.util.List;
  * @author joeyhaohao
  *
  */
-public class Tokenization extends Operator {
+public class Tokenize extends Operator {
 
     private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
-    public Tokenization(OperatorDescription description) {
+    public Tokenize(OperatorDescription description) {
         super(description);
     }
 

@@ -1,4 +1,4 @@
-package hanMiner.operator.processing.Filtering;
+package hanMiner.operator.processing.filtering;
 
 import com.hankcs.hanlp.dictionary.stopword.CoreStopWordDictionary;
 import com.hankcs.hanlp.seg.common.Term;

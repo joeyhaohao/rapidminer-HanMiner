@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.List;
 import org.junit.Test;
 
-public class TokenizationTest {
+public class TokenizeTest {
 
     @Test
     public void main(){

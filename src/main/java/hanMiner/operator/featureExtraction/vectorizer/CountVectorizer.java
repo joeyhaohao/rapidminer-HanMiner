@@ -59,7 +59,7 @@ public class CountVectorizer extends Operator {
     public void doWork() throws OperatorException {
         DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
         int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
-        // get word count across the corpus
+        // Get word count across the corpus
         Map<String, Integer> wordCounter = wordCount(documentSet);
         int featureNum = Math.min(wordCounter.size(), maxFeatureNum);
         PriorityQueue<Map.Entry<String, Integer>> minHeap = new PriorityQueue<>((a, b) -> (a.getValue() - b.getValue()));
@@ -70,18 +70,18 @@ public class CountVectorizer extends Operator {
             }
         }
 
-        // create word to feature map
+        // Create word to feature map
         HashMap<String, Integer> word2featureMap = new HashMap<>();
         int ind = 0;
         for (Map.Entry<String, Integer> entry: minHeap){
             word2featureMap.put(entry.getKey(), ind++);
         }
 
-        // create new example set of vectors
+        // Create new example set of vectors
         List<Attribute> listOfAtts = new LinkedList<>();
         for (int i = 0; i < featureNum; i++) {
             Attribute newNumericalAtt = AttributeFactory.createAttribute(
-                    "feature_" + i,
+                    "Feature_" + i,
                     Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
             listOfAtts.add(newNumericalAtt);
         }

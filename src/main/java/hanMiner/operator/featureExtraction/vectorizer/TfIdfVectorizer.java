@@ -77,7 +77,7 @@ public class TfIdfVectorizer extends Operator {
         List<Attribute> listOfAtts = new LinkedList<>();
         for (int i = 0; i < featureNum; i++) {
             Attribute newNumericalAtt = AttributeFactory.createAttribute(
-                    "feature_" + i,
+                    "Feature_" + i,
                     Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
             listOfAtts.add(newNumericalAtt);
         }
