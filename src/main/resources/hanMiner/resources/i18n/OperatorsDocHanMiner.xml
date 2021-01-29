@@ -5,8 +5,8 @@
         <key>read_document</key>
         <name>Read Document</name>
         <synopsis>This operator reads documents.</synopsis>
-        <help>This operator can be used to create an document set{@link SimpleDocumentSet}. Users can
-            either load text from files or create it in a text editor. Each line of the text is taken
+        <help>This operator can be used to create an document set. Users can either load
+            text from files or create it in a text editor. Each line of the text is taken
             as an document. Empty lines will be removed.</help>
     </operator>
     <operator>
@@ -122,6 +122,27 @@
             default or custom corpus. The output is an example set that contains both original
             documents and classification result.</help>
     </operator>
+    <operator>
+        <key>part_of_speech_tagging</key>
+        <name>Part-of-speech Tagging</name>
+        <synopsis>This operator performs part-of-speech (POS) tagging.</synopsis>
+        <help> This operator performs part-of-speech (POS) tagging. See the meaning of each tag on:
+            http://www.hankcs.com/nlp/part-of-speech-tagging.html#h2-8</help>
+    </operator>
+    <operator>
+        <key>entity_recognition</key>
+        <name>Entity Recognition</name>
+        <synopsis>This operator recognize Chinese name/place/organization entities in text.</synopsis>
+        <help>This operator recognize Chinese name/place/organization entities in text. Only the entities will be
+            kept in the output.</help>
+    </operator>
+    <operator>
+        <key>dependency_parsing</key>
+        <name>Dependency Parsing</name>
+        <synopsis>This operator parse dependencies among words within a sentence.</synopsis>
+        <help>This operator parse dependencies among words within a sentence. Sentences must be separated by
+            Chinese period sign "?".</help>
+    </operator>
 
     <!-- This is how group keys are translated: -->
     <group>
@@ -151,6 +172,10 @@
     <group>
         <key>classification</key>
         <name>Classification</name>
+    </group>
+    <group>
+        <key>analyzing</key>
+        <name>Analyzing</name>
     </group>
 
 </operatorHelp>

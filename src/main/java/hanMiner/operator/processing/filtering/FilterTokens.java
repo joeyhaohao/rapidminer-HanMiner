@@ -92,6 +92,7 @@ public class FilterTokens extends Operator {
                                 word -> word.equals(expr) ^ inverse_condition
                         );
                     }
+                    break;
                 case CONDITION_CONTAINS:
                     if (use_regex) {
                         wordStream = wordStream.filter(
@@ -102,6 +103,7 @@ public class FilterTokens extends Operator {
                                 word -> word.contains(expr) ^ inverse_condition
                         );
                     }
+                    break;
             }
             output.add(String.join(" ", wordStream.collect(Collectors.toList())));
         }

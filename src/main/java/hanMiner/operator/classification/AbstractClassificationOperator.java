@@ -129,16 +129,16 @@ public class AbstractClassificationOperator extends Operator {
                 "Document" ,
                 Ontology.ATTRIBUTE_VALUE_TYPE.STRING);
         listOfAtts.add(docAtt);
-
-        Attribute sentimentAtt = AttributeFactory.createAttribute(
+        Attribute classAtt = AttributeFactory.createAttribute(
                 "Classification" ,
                 Ontology.ATTRIBUTE_VALUE_TYPE.STRING);
-        listOfAtts.add(sentimentAtt);
+        listOfAtts.add(classAtt);
         MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
+
         for (String doc: documentSet.getDocuments()) {
             double[] doubleArray = new double[2];
             doubleArray[0] = docAtt.getMapping().mapString(doc);
-            doubleArray[1] = sentimentAtt.getMapping().mapString(classifier.classify(doc));
+            doubleArray[1] = classAtt.getMapping().mapString(classifier.classify(doc));
             table.addDataRow(new DoubleArrayDataRow(doubleArray));
         }
 

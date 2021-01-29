@@ -89,5 +89,20 @@
                 <class>hanMiner.operator.classification.SentimentAnalysis</class>
             </operator>
         </group>
+        <group key="analyzing">
+            <icon>operator_analyzing.png</icon>
+            <operator>
+                <key>part_of_speech_tagging</key>
+                <class>hanMiner.operator.analyzing.PartOfSpeechTagging</class>
+            </operator>
+            <operator>
+                <key>entity_recognition</key>
+                <class>hanMiner.operator.analyzing.EntityRecognition</class>
+            </operator>
+            <operator>
+                <key>dependency_parsing</key>
+                <class>hanMiner.operator.analyzing.DependencyParsing</class>
+            </operator>
+        </group>
     </group>
 </operators>

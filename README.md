@@ -4,7 +4,7 @@
 No programming knowledge required for Chinese text mining! The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) 
 provides a set of easy-to-use tools to perform Chinese Mandarin (or Han language) text processing/mining tasks such as 
 tokenization, document vectorization, keywords extraction and sentiment analysis, in graphical interface of RapidMiner. 
-It frees researchers/data analysts/scientists with limited background in language programming from coding in text mining. 
+It frees researchers/data analysts with limited background in language programming from coding in performing text mining. 
 Simply drag and connect operators in your process at [Rapidminer studio](https://rapidminer.com/products/studio/) and 
 run your tasks!
 
@@ -17,7 +17,7 @@ run your tasks!
     * Filter stopwords
     * Filter tokens
     * Filter documents
-* FeatureExtraction
+* Feature Extraction
   * Word Count
   * Keyword extraction
   * Vectorizer

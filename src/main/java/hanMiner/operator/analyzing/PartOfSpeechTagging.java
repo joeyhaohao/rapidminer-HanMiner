@@ -1,54 +1,37 @@
-package hanMiner.operator.processing;
+package hanMiner.operator.analyzing;
 
 import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
 import com.rapidminer.operator.Operator;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
+import com.rapidminer.parameter.ParameterType;
+import com.rapidminer.parameter.ParameterTypeCategory;
+import com.rapidminer.parameter.ParameterTypeInt;
 import hanMiner.text.SimpleDocumentSet;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static hanMiner.operator.processing.Tokenize.tokenize;
+
 /**
- * This operator segments Chinese documents into words (tokens).
+ * This operator performs part-of-speech (POS) tagging. See the meaning of each tag on:
+ * http://www.hankcs.com/nlp/part-of-speech-tagging.html#h2-8
  *
  * @author joeyhaohao
  *
  */
-public class Tokenize extends Operator {
+public class PartOfSpeechTagging extends Operator {
 
     private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort documentSetOutput = getOutputPorts().createPort("document set");
 
-    public Tokenize(OperatorDescription description) {
+    public PartOfSpeechTagging(OperatorDescription description) {
         super(description);
-    }
-
-    public static List<List<Term>> tokenize(SimpleDocumentSet documentSet, boolean enable_place,
-                                            boolean enable_institution) {
-        List<List<Term>> output = new ArrayList<>();
-        // Name entity recognition is enabled by default
-        Segment segment = HanLP.newSegment();
-        if (enable_place) {
-            segment.enablePlaceRecognize(true);
-        }
-        if (enable_institution) {
-            segment.enableOrganizationRecognize(true);
-        }
-        for (String doc: documentSet.getDocuments()){
-            List<Term> segments = segment.seg(doc);
-            output.add(segments);
-        }
-        return output;
-    }
-
-    public static List<List<Term>> tokenize(SimpleDocumentSet documentSet) {
-        return tokenize(documentSet, false, false);
     }
 
     @Override
@@ -57,7 +40,7 @@ public class Tokenize extends Operator {
         List<List<Term>> termsList = tokenize(documentSet);
         List<String> output = new ArrayList<>();
         for (List<Term> terms: termsList){
-            List<String> words = terms.stream().map(term -> term.word).collect(Collectors.toList());
+            List<String> words = terms.stream().map(term -> term.toString()).collect(Collectors.toList());
             output.add(String.join(" ", words));
         }
 
