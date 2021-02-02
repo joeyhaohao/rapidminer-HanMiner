@@ -19,7 +19,6 @@ import java.util.*;
  */
 
 public class SimplifiedToTraditional extends Operator {
-
     private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort documentSetOutput = getOutputPorts().createPort("document set");
 

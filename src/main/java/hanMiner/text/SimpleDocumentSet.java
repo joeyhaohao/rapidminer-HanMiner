@@ -8,10 +8,13 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.lang.reflect.Constructor;
 import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.hankcs.hanlp.seg.common.Term;
 import com.rapidminer.operator.IOObject;
 import com.rapidminer.operator.ResultObjectAdapter;
 
@@ -33,11 +36,30 @@ public class SimpleDocumentSet extends ResultObjectAdapter implements DocumentSe
     private List<String> documents;
 
     /**
-     * Constructs a new SimpleDocSet backed by the given document.
+     * Constructs a new SimpleDocumentSet backed by the given document.
      */
     public SimpleDocumentSet(List<String> docs) {
-        // remove empty line
-        this.documents = docs.stream().filter(line -> line.length() > 0).collect(Collectors.toList());
+        // remove empty line and extra spaces
+        this.documents = docs.stream()
+                .filter(line -> line.length() > 0)
+                .map(str -> str.replaceAll("\\s+", " "))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Update documents with a list of terms.
+     */
+    public SimpleDocumentSet(Collection<List<Term>> termsList, boolean keep_nature) {
+        this.documents = new ArrayList<>();
+        for (List<Term> terms: termsList) {
+            List<String> words;
+            if (keep_nature) {
+                words = terms.stream().map(term -> term.toString()).collect(Collectors.toList());
+            } else {
+                words = terms.stream().map(term -> term.word).collect(Collectors.toList());
+            }
+            documents.add(String.join(" ", words));
+        }
     }
 
     /** This method overrides the implementation of ResultObjectAdapter and returns "DocumentSet". */
@@ -57,6 +79,13 @@ public class SimpleDocumentSet extends ResultObjectAdapter implements DocumentSe
      */
     public List<String> getDocuments() {
         return documents;
+    }
+
+    /**
+     * Returns documents as a string.
+     */
+    public String getDocumentsAsString() {
+        return String.join("\n", documents);
     }
 
     /**

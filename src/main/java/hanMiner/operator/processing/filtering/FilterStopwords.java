@@ -30,11 +30,7 @@ import java.util.stream.Collectors;
  */
 
 public class FilterStopwords extends Operator {
-
     private static final String PARAMETER_LOAD_STOPWORDS_FROM_FILE = "load_stopwords_from_file";
-    private static final String PARAMETER_FILTER_PUNCTUATION = "filter_punctuation";
-    private static final String PARAMETER_FILTER_NUMBER = "filter_number";
-    private static final String PARAMETER_FILTER_NON_CHINESE_CHAR = "filter_non_chinese_character";
     private static final String PARAMETER_STOPWORDS_FILE = "stopwords_file";
 
     private InputPort documentSetInput = getInputPorts().createPort("document set");
@@ -49,10 +45,10 @@ public class FilterStopwords extends Operator {
         List<ParameterType> types = super.getParameterTypes();
         ParameterType type = new ParameterTypeBoolean(
                 PARAMETER_LOAD_STOPWORDS_FROM_FILE,
-                "If set to true, use custom stopwords dictionary from file." +
+                "If set to true, use custom stopwords dictionary from file. " +
                         "Otherwise, use default stopwords",
+                false,
                 false);
-        type.setExpert(false);
         types.add(type);
 
         type = new ParameterTypeFile(PARAMETER_STOPWORDS_FILE,
@@ -67,74 +63,51 @@ public class FilterStopwords extends Operator {
                         true));
         types.add(type);
 
-        type = new ParameterTypeBoolean(
-                PARAMETER_FILTER_PUNCTUATION,
-                "If set to true, filter all punctuation characters",
-                true,
-                false);
-        types.add(type);
-
-        type = new ParameterTypeBoolean(
-                PARAMETER_FILTER_NUMBER,
-                "If set to true, filter all numbers",
-                false,
-                false);
-        types.add(type);
-
-        type = new ParameterTypeBoolean(
-                PARAMETER_FILTER_NON_CHINESE_CHAR,
-                "If set to true, filter all non-Chinese characters",
-                false,
-                false);
-        types.add(type);
-
         return types;
+    }
+
+    // Use default stopwords
+    public String filterStopwords(String doc) {
+        List<String> wordList = Arrays.asList(doc.split("\\s+"));
+        List<Term> termList = wordList.stream().map(word -> new Term(word, null)).collect(Collectors.toList());
+        CoreStopWordDictionary.apply(termList);
+        return termList.stream().map(term -> term.word).collect(Collectors.joining(" "));
+    }
+
+    // Read custom stopwords from file
+    public String filterStopwords(String doc, File file) {
+        List<String> wordList = Arrays.asList(doc.split("\\s+"));
+        HashSet<String> stopwords = new HashSet<>();
+        try {
+            InputStreamReader reader = new InputStreamReader(
+                    new FileInputStream(file));
+            BufferedReader br = new BufferedReader(reader);
+            String line;
+            while ((line = br.readLine()) != null) {
+                stopwords.addAll(Arrays.asList(line.split("\\s+")));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        wordList = wordList.stream().filter(word -> !stopwords.contains(word)).collect(Collectors.toList());
+        return String.join(" ", wordList);
     }
 
     @Override
     public void doWork() throws OperatorException {
         SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
-        List<String> output = new ArrayList<>();
         boolean use_custom = getParameterAsBoolean(PARAMETER_LOAD_STOPWORDS_FROM_FILE);
-        boolean filter_punctuation = getParameterAsBoolean(PARAMETER_FILTER_PUNCTUATION);
-        boolean filter_number = getParameterAsBoolean(PARAMETER_FILTER_NUMBER);
-        boolean filter_non_chinese = getParameterAsBoolean(PARAMETER_FILTER_NON_CHINESE_CHAR);
-        for (String doc: documentSet.getDocuments()){
-            if (filter_punctuation) {
-                doc = doc.replaceAll("\\p{P}", "");
-            }
-            if (filter_number) {
-                doc = doc.replaceAll("[0-9]", "");
-            }
-            if (filter_non_chinese) {
-                doc = doc.replaceAll("[^\\u4e00-\\u9fa5|\\s]", "");
-            }
-            List<String> wordList = Arrays.asList(doc.split("\\s+"));
-            if (!use_custom){
-                // filter default stopwords
-                List<Term> termList = wordList.stream().map(word -> new Term(word, null)).collect(Collectors.toList());
-                CoreStopWordDictionary.apply(termList);
-                output.add(termList.toString().replaceAll("\\[|\\]|,",""));
-            } else {
-                // read custom stopwords from file
-                File file = getParameterAsFile(PARAMETER_STOPWORDS_FILE);
-                HashSet<String> stopwords = new HashSet<>();
-                try {
-                    InputStreamReader reader = new InputStreamReader(
-                            new FileInputStream(file));
-                    BufferedReader br = new BufferedReader(reader);
-                    String line;
-                    while ((line = br.readLine()) != null) {
-                        stopwords.addAll(Arrays.asList(line.split("\\s+")));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        File file = getParameterAsFile(PARAMETER_STOPWORDS_FILE);
 
-                // filter stopwords
-                wordList = wordList.stream().filter(word -> !stopwords.contains(word)).collect(Collectors.toList());
-                output.add(String.join(" ", wordList));
+        List<String> output = new ArrayList<>();
+        for (String doc: documentSet.getDocuments()) {
+            if (use_custom) {
+                doc = filterStopwords(doc, file);
+            } else {
+                doc = filterStopwords(doc);
             }
+            output.add(doc);
         }
 
         documentSetOutput.deliver(new SimpleDocumentSet(output));

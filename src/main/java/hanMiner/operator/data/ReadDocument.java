@@ -20,8 +20,8 @@ import java.util.List;
 
 /**
  * This operator can be used to create an document set{@link SimpleDocumentSet}. Users can
- * either load text from files or create it in a text editor. Each line of the text is taken
- * as an document. Empty lines will be removed.
+ * either load text from local files or create it in a text editor. Each line of the text
+ * is taken as an document. Empty lines will be removed.
  *
  * @author joeyhaohao
  */

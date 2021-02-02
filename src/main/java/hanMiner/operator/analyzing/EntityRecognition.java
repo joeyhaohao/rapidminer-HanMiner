@@ -52,6 +52,16 @@ public class EntityRecognition extends Operator {
         return types;
     }
 
+    public String getEntities(List<Term> terms, String entity_tag) {
+        List<String> entities = new ArrayList<>();
+        for (Term term: terms) {
+            if (term.nature.toString().contains(entity_tag)) {
+                entities.add(term.word);
+            }
+        }
+        return String.join(" ", entities);
+    }
+
     @Override
     public void doWork() throws OperatorException {
         SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
@@ -65,22 +75,16 @@ public class EntityRecognition extends Operator {
                 break;
             case ENTITY_PLACE:
                 entity_tag = ENTITY_TAG_PLACE;
-                termsList = tokenize(documentSet, true, false);
+                termsList = tokenize(documentSet, true, false, false);
                 break;
             case ENTITY_ORGANIZATION:
                 entity_tag = ENTITY_TAG_ORGANIZATION;
-                termsList = tokenize(documentSet, false, true);
+                termsList = tokenize(documentSet, false, true, false);
                 break;
         }
 
         for (List<Term> terms: termsList){
-            List<String> entities = new ArrayList<>();
-            for (Term term: terms) {
-                if (term.nature.toString().contains(entity_tag)) {
-                    entities.add(term.word);
-                }
-            }
-            output.add(String.join(" ", entities));
+            output.add(getEntities(terms, entity_tag));
         }
 
         SimpleDocumentSet resultObject = new SimpleDocumentSet(output);

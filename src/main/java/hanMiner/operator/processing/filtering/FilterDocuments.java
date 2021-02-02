@@ -17,13 +17,12 @@ import java.util.regex.Pattern;
 
 /**
  *
- * This operator filters documents. Only documents match the condition will be
- * kept in the output.
+ * This operator filters documents by conditions. Only documents match the condition will be removed.
  *
  * @author joeyhaohao
  */
 public class FilterDocuments extends Operator {
-    public static final String PARAMETER_CONDITION = "condition";
+    public static final String PARAMETER_REMOVE_CONDITION = "remove_condition";
     public static final String PARAMETER_USE_REGEX = "use_regular_expression";
     public static final String PARAMETER_EXPR = "expression";
     public static final String PARAMETER_INVERSE_CONDITION = "inverse_condition";
@@ -41,7 +40,7 @@ public class FilterDocuments extends Operator {
     @Override
     public List<ParameterType> getParameterTypes() {
         List<ParameterType> types = super.getParameterTypes();
-        ParameterType type = new ParameterTypeCategory(PARAMETER_CONDITION,
+        ParameterType type = new ParameterTypeCategory(PARAMETER_REMOVE_CONDITION,
                 "The condition to filter tokens.",
                 CONDITIONS,
                 CONDITION_MATCHES,
@@ -61,7 +60,7 @@ public class FilterDocuments extends Operator {
         types.add(type);
 
         type = new ParameterTypeString(PARAMETER_EXPR,
-                "The expression to be compared to",
+                "The expression to be compared to. Only work if not empty.",
                 "",
                 false);
         types.add(type);
@@ -75,24 +74,33 @@ public class FilterDocuments extends Operator {
         boolean inverse_condition = getParameterAsBoolean(PARAMETER_INVERSE_CONDITION);
         boolean use_regex = getParameterAsBoolean(PARAMETER_USE_REGEX);
         String expr = getParameterAsString(PARAMETER_EXPR);
+
+        // Do nothing if the expression is empty
+        if (expr.length() == 0) {
+            documentSetOutput.deliver(documentSet);
+            return;
+        }
+
         List<String> output = new ArrayList<>();
         boolean condition_satisfied = false;
         for (String doc: documentSet.getDocuments()){
-            switch (getParameterAsInt(PARAMETER_CONDITION)) {
+            switch (getParameterAsInt(PARAMETER_REMOVE_CONDITION)) {
                 case CONDITION_MATCHES:
                     if (use_regex) {
                         condition_satisfied = doc.matches(expr);
                     } else {
                         condition_satisfied = doc.equals(expr);
                     }
+                    break;
                 case CONDITION_CONTAINS:
                     if (use_regex) {
                         condition_satisfied = Pattern.compile(expr).matcher(doc).find();
                     } else {
                         condition_satisfied = doc.contains(expr);
                     }
+                    break;
             }
-            if (condition_satisfied ^ inverse_condition) {
+            if (condition_satisfied == inverse_condition) {
                 output.add(doc);
             }
         }
