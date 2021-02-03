@@ -41,6 +41,8 @@ public class FilterTest {
     @Test
     public void testFilterTokens() {
         FilterTokens operator = new FilterTokens(description);
+
+        // Remove punctuations
         String result = operator.filterTokens(input, true, false, false,
                 CONDITION_MATCHES, false, "公司", false);
         String expected = "亚马逊 英语 Amazon com Inc 是 一家 总部 位于 美国 西雅图 的 跨国 电子商务 企业 业务 起始 于 线 上 " +

@@ -16,7 +16,7 @@ import java.util.*;
 
 /**
  *
- * This operator counts word occurrence and frequency in documents. The tokens must be separated
+ * This operator computes word occurrence and frequency in documents. Tokens must be separated
  * by one or more white spaces.
  *
  * @author joeyhaohao
@@ -29,6 +29,16 @@ public class WordCount extends Operator {
 
     public WordCount(OperatorDescription description) {
         super(description);
+    }
+
+
+    public static Map<String, Integer> wordCount(DocumentSet documentSet) {
+        List<String> wordList = Arrays.asList(documentSet.toString().split("\\s+"));
+        Map<String, Integer> wordCounter = new HashMap<>();
+        for (String word: wordList) {
+            wordCounter.put(word, wordCounter.getOrDefault(word, 0) + 1);
+        }
+        return wordCounter;
     }
 
     @Override
@@ -60,15 +70,6 @@ public class WordCount extends Operator {
 
         ExampleSet exampleSet = table.createExampleSet();
         exampleSetOutput.deliver(exampleSet);
-    }
-
-    public static Map<String, Integer> wordCount(DocumentSet documentSet) {
-        List<String> wordList = Arrays.asList(documentSet.toString().split("\\s+"));
-        Map<String, Integer> wordCounter = new HashMap<>();
-        for (String word: wordList) {
-            wordCounter.put(word, wordCounter.getOrDefault(word, 0) + 1);
-        }
-        return wordCounter;
     }
 
     // Sort a hash map by value

@@ -55,39 +55,40 @@
     <operator>
         <key>word_count</key>
         <name>Word Count</name>
-        <synopsis>This operator counts word occurrence and frequency in texts.</synopsis>
-        <help>This operator counts word occurrence and frequency in texts. The tokens
+        <synopsis>This operator computes word occurrence and frequency in texts.</synopsis>
+        <help>This operator computes word occurrence and frequency in texts. Tokens
             must be separated by one or more white spaces.</help>
     </operator>
     <operator>
         <key>keyword_extraction</key>
         <name>Keyword Extraction</name>
-        <synopsis> This operator extracts keywords from document using TextRank.</synopsis>
-        <help> This operator extracts keywords from document using TextRank. Users can specify
+        <synopsis>This operator extracts keywords from document using TextRank.</synopsis>
+        <help>This operator extracts keywords from document using TextRank. Users can specify
             number of keywords to extract.</help>
     </operator>
     <operator>
         <key>count_vectorizer</key>
         <name>Count Vectorizer</name>
-        <synopsis>This operator transform documents into vectors using word count.</synopsis>
-        <help> This operator transforms documents into vectors using word count. The output
-            is an n*m example set (n: number of documents, m: number of features). The result
-            can be fed into next-step NLP models.</help>
+        <synopsis>This operator transforms documents into vectors using word count.</synopsis>
+        <help>This operator transforms documents into vectors using word count. Tokens must be
+            separated by one or more white spaces. The output is an n*m example set (n: number
+            of documents, m: number of features). The result can be fed into next-step NLP models.</help>
     </operator>
     <operator>
         <key>tfidf_vectorizer</key>
         <name>TfIdf Vectorizer</name>
         <synopsis>This operator transform documents into vectors using TF-IDF.</synopsis>
-        <help>This operator transforms documents into vectors using TF-IDF. Stopwords will
-            be removed. The output is an n*m example set (n: number of documents, m: number
-            of features). The result can be fed into next-step NLP models.</help>
+        <help>This operator transforms documents into vectors using TF-IDF. Tokens must be
+            separated by one or more white spaces. The output is an n*m example set (n: number
+            of documents, m: number of features). The result can be fed into next-step NLP models.</help>
     </operator>
     <operator>
         <key>doc2vec</key>
         <name>Doc2vec</name>
         <synopsis>This operator transform documents into vectors using Doc2vec.</synopsis>
-        <help>This operator transform documents into vectors using Doc2vec. Users can
-            either load existing model or train a new model with default or custom corpus.
+        <help>This operator transform documents into vectors using Doc2vec. Tokens must be
+            separated by one or more white spaces. Users can either load existing model or
+            train a new model with default or custom corpus.
             It can take a few minutes to train a new model at the first time. After training
             is completed, the model will be cached, so that the performance will be much
             faster if users want models with the same embedding size next time.
@@ -110,19 +111,21 @@
         <key>sentiment_analysis</key>
         <name>Sentiment Analysis</name>
         <synopsis>This operator classifies documents according to positive/negative sentiments.</synopsis>
-        <help>This operator classifies documents according to positive/negative sentiments
-            using a Naive Bayes classifier. Users can either load a existing model or train
-            a new model with default or custom corpus. The output is an example set that
-            contains both original documents and classification result.</help>
+        <help>This operator classifies documents according to positive/negative sentiments using a Naive Bayes
+            classifier. Users can either load a pretrained model or use the default model trained on Weibo
+            sentiment dataset (120k):
+            https://github.com/SophonPlus/ChineseNlpCorpus/blob/master/datasets/weibo_senti_100k/intro.ipynb.
+            To train a new model, users can load a custom corpus from file. The output is an example set that
+            contains both original documents and he result of classification.</help>
     </operator>
     <operator>
         <key>document_classification</key>
         <name>Document Classification</name>
         <synopsis>This operator classifies documents according to topics.</synopsis>
-        <help>This operator classifies documents according to topics using a Naive Bayes
-            classifier. Users can either load existing a model or train a new model with
-            default or custom corpus. The output is an example set that contains both original
-            documents and classification result.</help>
+        <help>This operator classifies documents according to topics using a Naive Bayes classifier.
+            Users can either load a pretrained model or use the default model trained on mini-Sogou news
+            dataset(12k, 8 categories). To train a new model, users can load a custom corpus from file.
+            The output is an example set that contains both original documents and he result of classification.</help>
     </operator>
     <operator>
         <key>part_of_speech_tagging</key>

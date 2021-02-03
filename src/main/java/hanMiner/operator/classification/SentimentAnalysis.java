@@ -5,6 +5,8 @@ import com.rapidminer.operator.OperatorDescription;
 /**
  *
  * This operator classify documents according to positive/negative sentiments using a Naive Bayes classifier.
+ * The default model was trained on Weibo sentiment dataset (120k):
+ * https://github.com/SophonPlus/ChineseNlpCorpus/blob/master/datasets/weibo_senti_100k/intro.ipynb
  *
  * @author joeyhaohao
  */
@@ -12,9 +14,6 @@ import com.rapidminer.operator.OperatorDescription;
 public class SentimentAnalysis extends AbstractClassificationOperator {
 
     public SentimentAnalysis(OperatorDescription description) {
-        super(description,
-                "data/corpus/classification/ChnSentiCorp情感分析酒店评论",
-                "http://file.hankcs.com/corpus/ChnSentiCorp.zip",
-                "data/model/classification/sentiment_classifier.ser");
+        super(description, "data/model/classification/weibo_sentiment_12k.ser");
     }
 }

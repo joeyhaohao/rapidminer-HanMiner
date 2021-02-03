@@ -16,39 +16,37 @@ import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.parameter.ParameterType;
 import com.rapidminer.parameter.ParameterTypeBoolean;
+import com.rapidminer.parameter.ParameterTypeDirectory;
 import com.rapidminer.parameter.ParameterTypeFile;
 import com.rapidminer.parameter.conditions.BooleanParameterCondition;
 import com.rapidminer.tools.Ontology;
 import hanMiner.text.SimpleDocumentSet;
-import hanMiner.utility.TestUtility;
 
 import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
- * Abstract class for all classification operators. Users can either load a existing model or train a
- * new model with default or custom corpus. The output is an example set {@link ExampleSet} that contains
- * both original documents and classification result.
+ * Abstract class for all classification operators. Users can either load a pretrained model or
+ * use the default classification model. To train a new model, users can load a custom corpus from
+ * file. The output is an example set {@link ExampleSet} that contains both original documents and
+ * the result of classification.
  */
 
 public class AbstractClassificationOperator extends Operator {
 
     private static final String PARAMETER_LOAD_MODEL_FROM_FILE = "load_model_from_file";
     private static final String PARAMETER_MODEL_FILE = "model_file";
+    private static final String PARAMETER_USE_DEFAULT_MODEL = "use_default_model";
     private static final String PARAMETER_CORPUS_FILE = "corpus_file";
+    private static final String PARAMETER_SAVE_MODEL_TO = "save_model_to";
 
-    private String default_corpus_file;
-    private String corpus_url;
     private String default_model_file;
     private InputPort documentSetInput = getInputPorts().createPort("document set");
     private OutputPort exampleSetOutput = getOutputPorts().createPort("example set");
 
-    public AbstractClassificationOperator(OperatorDescription description, String corpus_file,
-                                          String corpus_url, String model_file) {
+    public AbstractClassificationOperator(OperatorDescription description, String model_file) {
         super(description);
-        this.default_corpus_file = corpus_file;
-        this.corpus_url = corpus_url;
         this.default_model_file = model_file;
     }
 
@@ -57,8 +55,7 @@ public class AbstractClassificationOperator extends Operator {
         List<ParameterType> types = super.getParameterTypes();
         ParameterType type = new ParameterTypeBoolean(
                 PARAMETER_LOAD_MODEL_FROM_FILE,
-                "If set to true, load a pre-trained classification model from file. " +
-                        "Otherwise, use default model",
+                "If set to true, load a pre-trained classification model from file.",
                 false,
                 false);
         types.add(type);
@@ -75,52 +72,87 @@ public class AbstractClassificationOperator extends Operator {
                         true));
         types.add(type);
 
-        type = new ParameterTypeFile(PARAMETER_CORPUS_FILE,
-                "If not null, use custom corpus to train a new model",
-                null,
+        type = new ParameterTypeBoolean(
+                PARAMETER_USE_DEFAULT_MODEL,
+                "If set to true, use the default model",
                 true,
+                false);
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_LOAD_MODEL_FROM_FILE,
+                        true,
+                        false));
+        types.add(type);
+
+        type = new ParameterTypeDirectory(PARAMETER_CORPUS_FILE,
+                "Folder that contains a classified corpus to train a new model." +
+                        "Text must be encoded in utf-8",
+                true);
+        type.setExpert(false);
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_LOAD_MODEL_FROM_FILE,
+                        false,
+                        false));
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_USE_DEFAULT_MODEL,
+                        true,
+                        false));
+        types.add(type);
+
+        type = new ParameterTypeFile(PARAMETER_SAVE_MODEL_TO,
+                "Path to save the new model",
+                "ser",
+                false,
                 false);
         type.registerDependencyCondition(
                 new BooleanParameterCondition(this,
                         PARAMETER_LOAD_MODEL_FROM_FILE,
                         false,
                         false));
+        type.registerDependencyCondition(
+                new BooleanParameterCondition(this,
+                        PARAMETER_USE_DEFAULT_MODEL,
+                        true,
+                        false));
         types.add(type);
 
         return types;
     }
 
-    @Override
-    public void doWork() throws OperatorException {
-        SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
+    private NaiveBayesModel loadModel() throws OperatorException{
         boolean load_model_from_file = getParameterAsBoolean(PARAMETER_LOAD_MODEL_FROM_FILE);
-
-        NaiveBayesModel model = null;
         if (load_model_from_file) {
-            // Use custom model from file
+            // Use a pretrained model from file
             String model_file = getParameterAsString(PARAMETER_MODEL_FILE);
-            model = (NaiveBayesModel) IOUtil.readObjectFrom(model_file);
+            return (NaiveBayesModel) IOUtil.readObjectFrom(model_file);
         } else {
-            String corpus_file = getParameterAsString(PARAMETER_CORPUS_FILE);
-            if (IOUtil.isFileExisted(default_model_file) && corpus_file == null) {
-                // Load an existing model
-                model = (NaiveBayesModel) IOUtil.readObjectFrom(default_model_file);
-            } else {
+            boolean use_default_model = getParameterAsBoolean(PARAMETER_USE_DEFAULT_MODEL);
+            if (!use_default_model) {
                 // Train and save a new classifier. It can take a few minutes for the first time.
+                String corpus_file = getParameterAsString(PARAMETER_CORPUS_FILE);
+                String save_model_to = getParameterAsString(PARAMETER_SAVE_MODEL_TO);
                 IClassifier classifier  = new NaiveBayesClassifier();
-                if (corpus_file == null) {
-                    corpus_file = default_corpus_file;
-                }
-                TestUtility.ensureTestData(corpus_file, corpus_url);
                 try {
                     classifier.train(corpus_file);
-                    model = (NaiveBayesModel) classifier.getModel();
-                    IOUtil.saveObjectTo(model, default_model_file);
+                    NaiveBayesModel model = (NaiveBayesModel) classifier.getModel();
+                    IOUtil.saveObjectTo(model, save_model_to);
+                    return model;
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
+        // Use the default model
+        return (NaiveBayesModel) IOUtil.readObjectFrom(default_model_file);
+    }
+
+    @Override
+    public void doWork() throws OperatorException {
+        SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
+
+        NaiveBayesModel model = loadModel();
         IClassifier classifier  = new NaiveBayesClassifier(model);
 
         // Create a new example set with two columns

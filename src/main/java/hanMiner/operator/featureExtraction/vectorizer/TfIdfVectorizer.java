@@ -19,9 +19,9 @@ import java.util.*;
 
 /**
  *
- * This operator can vectorize a set of documents using TF-IDF. Stopwords will be
- * removed. The output is an n*m example set {@link ExampleSet} (n: number of documents,
- * m: number of features). The result can be fed into next-step NLP models.
+ * This operator transforms documents to vectors using TF-IDF. Tokens must be separated
+ * by one or more white spaces. The output is an n*m example set {@link ExampleSet}
+ * (n: number of documents, m: number of features). The result can be fed into next-step NLP models.
  *
  * @author joeyhaohao
  */

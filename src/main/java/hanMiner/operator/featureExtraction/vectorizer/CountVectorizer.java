@@ -11,6 +11,7 @@ import com.rapidminer.operator.OperatorException;
 import com.rapidminer.operator.ports.InputPort;
 import com.rapidminer.operator.ports.OutputPort;
 import com.rapidminer.parameter.ParameterType;
+import com.rapidminer.parameter.ParameterTypeDirectory;
 import com.rapidminer.parameter.ParameterTypeInt;
 import com.rapidminer.tools.Ontology;
 import hanMiner.text.SimpleDocumentSet;
@@ -22,9 +23,9 @@ import static hanMiner.operator.featureExtraction.WordCount.wordCount;
 
 /**
  *
- * This operator transforms documents into vectors using word count. The output is
- * an n*m example set {@link ExampleSet} (n: number of documents, m: number of features).
- * The result can be fed into next-step NLP models.
+ * This operator transforms documents into vectors using word count. Tokens must be separated
+ * by one or more white spaces. The output is an n*m example set {@link ExampleSet} (n: number
+ * of documents, m: number of features). The result can be fed into next-step NLP models.
  *
  * @author joeyhaohao
  */
