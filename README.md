@@ -9,7 +9,6 @@ in text mining. Simply drag and connect operators in your process at [Rapidminer
 and run your tasks!
 
 ## Features
-
 * Document reader/writer
 * Processing
   * Word segmentation (tokenization)
@@ -27,7 +26,6 @@ and run your tasks!
 * Analyzing
   * Part-of-Speech (POS) Tagging
   * Name Entity Recognition
-  * Dependency parsing
 * Translation
   * Simplified Chinese to Traditional Chinese
   * Traditional Chinese to Simplifies Chinese
@@ -35,15 +33,13 @@ and run your tasks!
     * Document classification
     * Sentiment Analysis
 
-## Installation
+## Getting Started
+### Run with Intellij
+1. Clone this repository
+   `https://github.com/joeyhaohao/rapidminer-HanMiner.git`
+2. Open the project with [Intelli](https://www.jetbrains.com/idea/). Use Java 1.8 as project SDK. 
+3. Build the project
+4. Run `GuiLauncher` under the source folder
 
-1. Install [RapidMiner Studio](https://rapidminer.com/get-started/)
-2. Install Java JDK 1.8 or higher
-3. Clone this repo
-
-   `git clone https://github.com/yunhaojohn/rapidminer-HanMiner.git`
-4. On your project folder, execute in a terminal
-
-   `./gradlew installExtension`
-5. Open Rapidminer Studio. Use operators from this extension to perform text mining tasks. Happy mining!
-
+## Acknowledgement
+Some NLP models and functions of this project are imported from [Hanlp](https://hanlp.hankcs.com/docs/).
