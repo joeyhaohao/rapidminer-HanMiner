@@ -14,7 +14,6 @@ import static org.mockito.Mockito.when;
 
 
 public class FilterTest {
-
     private final static OperatorDescription description = Mockito.mock(OperatorDescription.class);
     private final static OperatorDocumentation documentation = Mockito.mock(OperatorDocumentation.class);
     private final static String input = "亚马逊 公司 （ 英语 ： Amazon . com , Inc . ） 是 一家 总部 位于 美国 西雅图 的 " +

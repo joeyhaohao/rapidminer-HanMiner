@@ -37,6 +37,15 @@ public class DependencyParsing extends Operator {
         super(description);
     }
 
+    public static String parseDependency(String doc) {
+        CoNLLSentence sentence = HanLP.parseDependency(doc);
+        List<String> dependencies = new ArrayList<>();
+        for (CoNLLWord word : sentence){
+            dependencies.add(String.format("%s --(%s)--> %s", word.LEMMA, word.DEPREL, word.HEAD.LEMMA));
+        }
+        return String.join(", ", dependencies);
+    }
+
     @Override
     public void doWork() throws OperatorException {
         SimpleDocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
@@ -55,13 +64,8 @@ public class DependencyParsing extends Operator {
 
         for (String doc: sentences) {
             double[] doubleArray = new double[2];
-            CoNLLSentence sentence = HanLP.parseDependency(doc);
-            List<String> dependencies = new ArrayList<>();
-            for (CoNLLWord word : sentence){
-                dependencies.add(String.format("%s --(%s)--> %s", word.LEMMA, word.DEPREL, word.HEAD.LEMMA));
-            }
             doubleArray[0] = docAtt.getMapping().mapString(doc);
-            doubleArray[1] = classAtt.getMapping().mapString(String.join(", ", dependencies));
+            doubleArray[1] = classAtt.getMapping().mapString(parseDependency(doc));
             table.addDataRow(new DoubleArrayDataRow(doubleArray));
         }
 

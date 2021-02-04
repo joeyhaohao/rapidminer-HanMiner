@@ -14,7 +14,7 @@ public class WordCountTest {
             "方法 包括 文本 分类 文本 聚 类 概念 实体 挖掘 生产 精确 分类 观点 分析 文档 摘要 和 实体 关系 模型 即 学习 已 命名 实体 " +
             "之间 的 关系 文本 分析 包括 了 信息检索 词典 分析 来 研究 词语 的 频数 分布 模式 识别 标签 注释 信息 抽取 数据挖掘 技术 " +
             "包括 链接 和 关联 分析 可视化 和 预测 分析 本质 上 首要 的 任务 是 通过 自然语言处理 NLP 和 分析 方法 将 文本 转化 为 " +
-            "数据 进行 分析 ";
+            "数据 进行 分析";
     private static final SimpleDocumentSet documentSet = new SimpleDocumentSet(Arrays.asList(input.split("\n")));
 
     @Test

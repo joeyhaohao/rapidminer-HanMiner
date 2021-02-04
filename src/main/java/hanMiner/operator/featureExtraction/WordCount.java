@@ -54,9 +54,6 @@ public class WordCount extends Operator {
         Attribute newNumericalAtt = AttributeFactory.createAttribute("Count",
                 Ontology.ATTRIBUTE_VALUE_TYPE.NUMERICAL);
         listOfAtts.add(newNumericalAtt);
-        newNumericalAtt = AttributeFactory.createAttribute("Frequency",
-                Ontology.ATTRIBUTE_VALUE_TYPE.REAL);
-        listOfAtts.add(newNumericalAtt);
         MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
 
         for (Map.Entry<String, Integer> entry: sortedCounter) {
@@ -64,7 +61,6 @@ public class WordCount extends Operator {
             doubleArray[0] = newNominalAtt.getMapping().mapString(
                     entry.getKey());
             doubleArray[1] = entry.getValue();
-            doubleArray[2] = entry.getValue()*1.0 / sortedCounter.size();
             table.addDataRow(new DoubleArrayDataRow(doubleArray));
         }
 

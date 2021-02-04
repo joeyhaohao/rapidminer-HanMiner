@@ -1,6 +1,7 @@
 package hanMiner.operator.featureExtraction.vectorizer;
 
 import com.hankcs.hanlp.mining.word.TfIdfCounter;
+import com.hankcs.hanlp.seg.common.Term;
 import com.rapidminer.example.Attribute;
 import com.rapidminer.example.ExampleSet;
 import com.rapidminer.example.table.*;
@@ -16,6 +17,7 @@ import hanMiner.text.SimpleDocumentSet;
 import hanMiner.text.DocumentSet;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -54,24 +56,39 @@ public class TfIdfVectorizer extends Operator {
         return types;
     }
 
-    @Override
-    public void doWork() throws OperatorException {
-        DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
-        int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
-
-        TfIdfCounter tfIdf = new TfIdfCounter(true);
+    public static TfIdfCounter computeTfIDF(DocumentSet documentSet) {
+        TfIdfCounter tfIdfCounter = new TfIdfCounter();
         for (int i = 0; i < documentSet.size(); i++) {
-            tfIdf.add(i, documentSet.getDocument(i));
+            String doc = documentSet.getDocument(i);
+//            List<Term> termList = Arrays.stream(doc.split("\\s+"))
+//                    .map(str -> new Term(str, null))
+//                    .collect(Collectors.toList());
+            tfIdfCounter.add(i, doc);
         }
+        return tfIdfCounter;
+    }
 
+    public HashMap<String, Integer> getWordFeatureMap(TfIdfCounter tfIdfCounter, int featureNum) {
         // Clip max number of features ordered by term frequency
-        int featureNum = Math.min(tfIdf.allTf().size(), maxFeatureNum);
-        List<Map.Entry<String, Double>> allTf = tfIdf.sortedAllTf().subList(0, featureNum);
+        List<Map.Entry<String, Double>> allTf = tfIdfCounter.sortedAllTf().subList(0, featureNum);
         HashMap<String, Integer> word2featureMap = new HashMap<>();
         int ind = 0;
         for (Map.Entry<String, Double> tf: allTf){
             word2featureMap.put(tf.getKey(), ind++);
         }
+        return word2featureMap;
+    }
+
+    @Override
+    public void doWork() throws OperatorException {
+        DocumentSet documentSet = documentSetInput.getData(SimpleDocumentSet.class);
+        int maxFeatureNum = getParameterAsInt(PARAMETER_MAX_FEATURES);
+
+        TfIdfCounter tfIdfCounter = computeTfIDF(documentSet);
+        Map<Object, Map<String, Double>> tfIdfMap = tfIdfCounter.compute();
+
+        int featureNum = Math.min(tfIdfCounter.allTf().size(), maxFeatureNum);
+        HashMap<String, Integer> word2featureMap = getWordFeatureMap(tfIdfCounter, featureNum);
 
         // Create new example set of vectors
         List<Attribute> listOfAtts = new LinkedList<>();
@@ -83,15 +100,15 @@ public class TfIdfVectorizer extends Operator {
         }
         MemoryExampleTable table = new MemoryExampleTable(listOfAtts);
 
-        for (Map.Entry<Object, Map<String, Double>> entry: tfIdf.compute().entrySet()) {
-            Map<String, Double> tfIdfMap = entry.getValue();
+        for (Map.Entry<Object, Map<String, Double>> entry: tfIdfMap.entrySet()) {
+            Map<String, Double> word2TfIdfMap = entry.getValue();
             double[] doubleArray = new double[listOfAtts.size()];
             Arrays.fill(doubleArray, 0.0);
 
-            for (String word: tfIdfMap.keySet()){
+            for (String word: word2TfIdfMap.keySet()){
                 if (word2featureMap.containsKey(word)) {
                     int index = word2featureMap.get(word);
-                    doubleArray[index] = tfIdfMap.get(word);
+                    doubleArray[index] = word2TfIdfMap.get(word);
                 }
             }
             table.addDataRow(new DoubleArrayDataRow(doubleArray));
