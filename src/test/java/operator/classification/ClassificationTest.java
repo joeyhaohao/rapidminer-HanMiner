@@ -58,7 +58,7 @@ public class ClassificationTest {
                 "这次包装的时候没有放好，给我折坏了，5555555，气死我了",
                 "书的质量和印刷都不错，字的大小也刚刚好，很清楚，喜欢。"};
         List<String> expected = Arrays.asList("正面", "负面", "正面", "负面", "正面");
-        NaiveBayesModel model = (NaiveBayesModel) IOUtil.readObjectFrom("data/model/classification/weibo_sentiment_12k.ser");
+        NaiveBayesModel model = (NaiveBayesModel) IOUtil.readObjectFrom("data/model/classification/weibo_sentiment_120k.ser");
         IClassifier classifier = new NaiveBayesClassifier(model);
         List<String> result = Arrays.stream(input).map(text -> classifier.classify(text)).collect(Collectors.toList());
         Assert.assertEquals(expected, result);

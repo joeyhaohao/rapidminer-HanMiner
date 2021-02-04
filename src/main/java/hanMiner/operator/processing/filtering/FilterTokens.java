@@ -180,6 +180,7 @@ public class FilterTokens extends Operator {
             output.add(result);
         }
 
-        documentSetOutput.deliver(new SimpleDocumentSet(output));
+        SimpleDocumentSet resultObj = new SimpleDocumentSet(output);
+        documentSetOutput.deliver(resultObj);
     }
 }

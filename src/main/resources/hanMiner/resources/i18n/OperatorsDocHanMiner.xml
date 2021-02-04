@@ -141,13 +141,6 @@
         <help>This operator recognize Chinese name/place/organization entities in text. Only the
             entities will be kept in the output.</help>
     </operator>
-    <operator>
-        <key>dependency_parsing</key>
-        <name>Dependency Parsing</name>
-        <synopsis>This operator parse dependencies among words within a sentence.</synopsis>
-        <help>This operator parse dependencies among words within a sentence. Sentences must be
-            separated by Chinese period sign.</help>
-    </operator>
 
     <!-- This is how group keys are translated: -->
     <group>

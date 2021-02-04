@@ -73,7 +73,8 @@ public class FilterTest {
 
         // Remove all non-chinese characters
         result = operator.filterTokens(input, true, false, true,
-                0, false, "", false);
+                0, false, "", false)
+                .trim().replaceAll("\\s+", " ");
         expected = "亚马逊 公司 英语 是 一家 总部 位于 美国 西雅图 的 跨国 电子商务 企业 业务 起始 于 线 上 书店 不久 之后 商品 " +
                 "走向 多元化 目前 是 全球 最大 的 互联网 线 上 零售商 之一 也 是 美国 财富 杂志 年 评选 的 全球 最大 家 公司 的 " +
                 "排行榜 中的 第 名 亚马逊 公司 在 年 的 财富 强 企业 里 列 第 位";

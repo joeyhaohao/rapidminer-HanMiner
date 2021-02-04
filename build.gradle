@@ -67,6 +67,13 @@ dependencies {
     // OS X adapter to add platform specific UI
     compile 'com.rapidminer.studio:rapidminer-studio-osx-adapter:1.0.3'
 
+    // RapidMiner license framework for license management
+    compile "com.rapidminer.license:rapidminer-license-api:$licenseVersion"
+    compile("com.rapidminer.license:rapidminer-license-commons:$licenseVersion") {
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-core'
+        exclude group: 'com.fasterxml.jackson.core', module: 'jackson-databind'
+    }
+
     // RapidMiner API
     compile 'com.rapidminer:rapidminer-api:0.2.2'
 

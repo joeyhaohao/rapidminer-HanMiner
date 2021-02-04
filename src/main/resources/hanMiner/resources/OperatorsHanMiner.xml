@@ -99,10 +99,6 @@
                 <key>entity_recognition</key>
                 <class>hanMiner.operator.analyzing.EntityRecognition</class>
             </operator>
-            <operator>
-                <key>dependency_parsing</key>
-                <class>hanMiner.operator.analyzing.DependencyParsing</class>
-            </operator>
         </group>
     </group>
 </operators>

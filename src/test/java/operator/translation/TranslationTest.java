@@ -30,9 +30,9 @@ public class TranslationTest {
     private static final String string_simplified = "大卫贝克汉不仅仅是名著名球员，球场以外，其妻为前辣妹合唱团成员维多利亚·碧咸，" +
             "亦由于他拥有突出外表、百变发型及正面的形象，以至自己品牌的男士香水等商品，及长期担任运动品牌Adidas的代言人，" +
             "因此对大众传播媒介和时尚界等方面都具很大的影响力，在足球圈外所获得的认受程度可谓前所未见。";
-    private static final String string_traditional = "大衛貝克漢不僅僅是名著名球員，球場以外，其妻為前辣妹合唱團成員維多利亞·碧咸，" +
+    private static final String string_traditional = "大衛貝克漢不僅僅是名著名球員，球場以外，其妻爲前辣妹合唱團成員維多利亞·碧鹹，" +
             "亦由於他擁有突出外表、百變髮型及正面的形象，以至自己品牌的男士香水等商品，及長期擔任運動品牌Adidas的代言人，" +
-            "因此對大眾傳播媒介和時尚界等方面都具很大的影響力，在足球圈外所獲得的認受程度可謂前所未見。";
+            "因此對大衆傳播媒介和時尚界等方面都具很大的影響力，在足球圈外所獲得的認受程度可謂前所未見。";
 
     @Test
     public void testSimplifiedToTraditional() {

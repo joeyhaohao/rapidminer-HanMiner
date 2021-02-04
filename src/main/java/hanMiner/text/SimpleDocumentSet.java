@@ -63,13 +63,13 @@ public class SimpleDocumentSet extends ResultObjectAdapter implements DocumentSe
     public SimpleDocumentSet(List<String> docs) {
         // remove empty line and extra spaces
         this.documents = docs.stream()
+                .map(str -> str.trim().replaceAll("\\s+", " "))
                 .filter(line -> line.length() > 0)
-                .map(str -> str.replaceAll("\\s+", " "))
                 .collect(Collectors.toList());
     }
 
     /**
-     * Update documents with a list of terms.
+     * Constructs a SimpleDocumentSet with a list of terms.
      */
     public SimpleDocumentSet(Collection<List<Term>> termsList, boolean keep_nature) {
         this.documents = new ArrayList<>();
