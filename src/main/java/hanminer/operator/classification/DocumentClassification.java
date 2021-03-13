@@ -20,26 +20,23 @@
  * README: https://github.com/joeyhaohao/rapidminer-HanMiner/blob/master/README.md
  */
 
-package operator.analyzing;
+package hanminer.operator.classification;
 
-import com.hankcs.hanlp.seg.common.Term;
-import hanminer.operator.processing.Tokenize;
-import hanminer.document.SimpleDocumentSet;
-import org.junit.Assert;
-import org.junit.Test;
+import com.rapidminer.operator.OperatorDescription;
 
-import java.util.Arrays;
-import java.util.List;
+/**
+ *
+ * This operator classify documents according to topics using a Naive Bayes classifier.
+ * The default model was trained on mini Sogou news dataset (12k, 8 categories):
+ * https://github.com/lijqhs/text-classification-cn
+ *
+ * @author joeyhaohao
+ */
 
-public class PartOfSpeechTaggingTest {
-    private static final String input = "总统普京与特朗普通电话讨论太空探索技术公司";
-    private static final SimpleDocumentSet documentSet = new SimpleDocumentSet(Arrays.asList(input.split("\n")));
+public class DocumentClassification extends AbstractClassificationOperator {
 
-    @Test
-    public void testPOSTagging(){
-        List<List<Term>> termsList = Tokenize.tokenize(documentSet);
-        SimpleDocumentSet result = new SimpleDocumentSet(termsList, true);
-        String expected = "总统/nnt 普京/nrf 与/cc 特朗普/nrf 通电话/vi 讨论/v 太空/s 探索/v 技术/n 公司/nis";
-        Assert.assertEquals(expected, result.getDocumentsAsString());
+    public DocumentClassification(OperatorDescription description) {
+        super(description, "data/model/classification/sogou_8cat.ser");
     }
+
 }

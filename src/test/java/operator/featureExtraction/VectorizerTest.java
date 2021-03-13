@@ -26,7 +26,7 @@ import com.hankcs.hanlp.mining.word.TfIdfCounter;
 import com.hankcs.hanlp.mining.word2vec.DocVectorModel;
 import com.hankcs.hanlp.mining.word2vec.Vector;
 import com.hankcs.hanlp.mining.word2vec.WordVectorModel;
-import hanMiner.text.SimpleDocumentSet;
+import hanminer.document.SimpleDocumentSet;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Map;
 
-import static hanMiner.operator.featureExtraction.vectorizer.TfIdfVectorizer.computeTfIDF;
+import static hanminer.operator.featureExtraction.vectorizer.TfIdfVectorizer.computeTfIDF;
 
 public class VectorizerTest {
     private final static String input = "文本 挖掘 Text mining 有时 也 被 称为 文字 探 勘 文本 数据挖掘 等 大致 相当于 文字 分析 " +
