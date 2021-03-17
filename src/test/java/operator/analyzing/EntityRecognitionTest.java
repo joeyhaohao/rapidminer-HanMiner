@@ -25,8 +25,8 @@ package operator.analyzing;
 import com.hankcs.hanlp.seg.common.Term;
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.tools.documentation.OperatorDocumentation;
-import hanminer.operator.analyzing.EntityRecognition;
-import hanminer.document.SimpleDocumentSet;
+import com.rapidminer.extension.hanminer.operator.analyzing.EntityRecognition;
+import com.rapidminer.extension.hanminer.document.SimpleDocumentSet;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static hanminer.operator.processing.Tokenize.tokenize;
+import static com.rapidminer.extension.hanminer.operator.processing.Tokenize.tokenize;
 import static org.mockito.Mockito.when;
 
 public class EntityRecognitionTest {

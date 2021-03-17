@@ -25,8 +25,8 @@ package operator.processing;
 import com.hankcs.hanlp.seg.common.Term;
 import java.util.Arrays;
 import java.util.List;
-import hanminer.operator.processing.Tokenize;
-import hanminer.document.SimpleDocumentSet;
+import com.rapidminer.extension.hanminer.operator.processing.Tokenize;
+import com.rapidminer.extension.hanminer.document.SimpleDocumentSet;
 import org.junit.Assert;
 import org.junit.Test;
 

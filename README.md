@@ -1,11 +1,10 @@
-![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/com/rapidminer/resources/icons/hanminer.png) HanMiner Extension for RapidMiner  
+![](https://github.com/joeyhaohao/rapidminer-Hanminer/blob/master/src/main/resources/com/rapidminer/resources/icons/com.rapidminer.extension.hanminer.png) HanMiner Extension for RapidMiner  
 ==============================
 
-No programming knowledge required for Chinese text mining! The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) 
-provides a fast and easy-to-use toolset to perform Chinese Mandarin (or Han language) text processing/mining tasks 
-such as word segmentation, document vectorization, keywords extraction and sentiment analysis, in the graphical interface 
-of RapidMiner. It aims at saving researchers/data analysts from codes in Chinese text mining. Simply drag and connect 
-operators in your process at [Rapidminer studio](https://rapidminer.com/products/studio/) and run your tasks!
+Understanding unstructured text data without the need to code! The HanMiner Extension of [RapidMiner](https://www.rapidminer.com) 
+provides a fast and easy-to-use toolset for text processing/mining in Chinese Mandarin (Han language). It enables 
+researchers/data analysts to extract valuable information from text with no programming knowledge required. Use it to 
+build your own workflow for public opinion monitoring, sentiment analysis, keyword extraction for wordle, etc.
 
 ## Features
 * Document reader/writer

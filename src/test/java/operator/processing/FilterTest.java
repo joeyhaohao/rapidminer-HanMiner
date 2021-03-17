@@ -24,14 +24,14 @@ package operator.processing;
 
 import com.rapidminer.operator.OperatorDescription;
 import com.rapidminer.tools.documentation.OperatorDocumentation;
-import hanminer.operator.processing.filtering.FilterStopwords;
-import hanminer.operator.processing.filtering.FilterTokens;
+import com.rapidminer.extension.hanminer.operator.processing.filtering.FilterStopwords;
+import com.rapidminer.extension.hanminer.operator.processing.filtering.FilterTokens;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import static hanminer.operator.processing.filtering.FilterTokens.CONDITION_MATCHES;
+import static com.rapidminer.extension.hanminer.operator.processing.filtering.FilterTokens.CONDITION_MATCHES;
 import static org.mockito.Mockito.when;
 
 

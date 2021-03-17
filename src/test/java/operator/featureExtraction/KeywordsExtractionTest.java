@@ -23,8 +23,8 @@
 package operator.featureExtraction;
 
 import com.hankcs.hanlp.HanLP;
-import hanminer.operator.featureExtraction.KeywordExtraction;
-import hanminer.document.SimpleDocumentSet;
+import com.rapidminer.extension.hanminer.operator.featureExtraction.KeywordExtraction;
+import com.rapidminer.extension.hanminer.document.SimpleDocumentSet;
 import org.junit.Assert;
 import org.junit.Test;
 

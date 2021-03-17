@@ -16,4 +16,4 @@ config/pmd/ruleset.xml
 .pmd
 .DS_Store
 *.bin
-data/corpus
+src/main/resources/com/rapidminer/resources/data/corpus

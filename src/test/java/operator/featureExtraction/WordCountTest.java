@@ -22,8 +22,8 @@
 
 package operator.featureExtraction;
 
-import hanminer.operator.featureExtraction.WordCount;
-import hanminer.document.SimpleDocumentSet;
+import com.rapidminer.extension.hanminer.operator.featureExtraction.WordCount;
+import com.rapidminer.extension.hanminer.document.SimpleDocumentSet;
 import org.junit.Assert;
 import org.junit.Test;
 import java.util.*;

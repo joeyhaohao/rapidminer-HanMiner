@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<operators name="HanMiner" version="6.0" docbundle="com/rapidminer/resources/i18n/OperatorsDocHanMiner">
+    <group key="">
+        <!-- This is an example how to specify Operators and Operator groups. The Operator groups define
+                where Operators will be located in the Operator tree. -->
+        <group key="data">
+            <icon>operator_io.png</icon>
+            <operator>
+                <key>read_document</key>
+                <class>com.rapidminer.extension.hanminer.operator.data.ReadDocument</class>
+            </operator>
+            <operator>
+                <key>write_document</key>
+                <class>com.rapidminer.extension.hanminer.operator.data.WriteDocument</class>
+            </operator>
+        </group>
+        <group key="processing">
+            <icon>operator_processing.png</icon>
+            <operator>
+                <key>tokenize</key>
+                <class>com.rapidminer.extension.hanminer.operator.processing.Tokenize</class>
+            </operator>
+            <group key="filtering">
+                <operator>
+                    <key>filter_stopwords</key>
+                    <class>com.rapidminer.extension.hanminer.operator.processing.filtering.FilterStopwords</class>
+                </operator>
+                <operator>
+                    <key>filter_tokens</key>
+                    <class>com.rapidminer.extension.hanminer.operator.processing.filtering.FilterTokens</class>
+                </operator>
+                <operator>
+                    <key>filter_documents</key>
+                    <class>com.rapidminer.extension.hanminer.operator.processing.filtering.FilterDocuments</class>
+                </operator>
+            </group>
+        </group>
+        <group key="feature_extraction">
+            <icon>operator_featureExtraction.png</icon>
+            <operator>
+                <key>word_count</key>
+                <class>com.rapidminer.extension.hanminer.operator.featureExtraction.WordCount</class>
+            </operator>
+            <operator>
+                <key>keyword_extraction</key>
+                <class>com.rapidminer.extension.hanminer.operator.featureExtraction.KeywordExtraction</class>
+            </operator>
+            <group key="vectorizer">
+                <operator>
+                    <key>count_vectorizer</key>
+                    <class>com.rapidminer.extension.hanminer.operator.featureExtraction.vectorizer.CountVectorizer</class>
+                </operator>
+                <operator>
+                    <key>tfidf_vectorizer</key>
+                    <class>com.rapidminer.extension.hanminer.operator.featureExtraction.vectorizer.TfIdfVectorizer</class>
+                </operator>
+                <operator>
+                    <key>doc2vec</key>
+                    <class>com.rapidminer.extension.hanminer.operator.featureExtraction.vectorizer.Doc2vec</class>
+                </operator>
+            </group>
+        </group>
+        <group key="translation">
+            <icon>operator_translation.png</icon>
+            <operator>
+                <key>simplified_to_traditional</key>
+                <class>com.rapidminer.extension.hanminer.operator.translation.SimplifiedToTraditional</class>
+            </operator>
+            <operator>
+                <key>traditional_to_simplified</key>
+                <class>com.rapidminer.extension.hanminer.operator.translation.TraditionalToSimplified</class>
+            </operator>
+        </group>
+        <group key="classification">
+            <icon>operator_classification.png</icon>
+            <operator>
+                <key>document_classification</key>
+                <class>com.rapidminer.extension.hanminer.operator.classification.DocumentClassification</class>
+            </operator>
+            <operator>
+                <key>sentiment_analysis</key>
+                <class>com.rapidminer.extension.hanminer.operator.classification.SentimentAnalysis</class>
+            </operator>
+        </group>
+        <group key="analyzing">
+            <icon>operator_analyzing.png</icon>
+            <operator>
+                <key>part_of_speech_tagging</key>
+                <class>com.rapidminer.extension.hanminer.operator.analyzing.PartOfSpeechTagging</class>
+            </operator>
+            <operator>
+                <key>entity_recognition</key>
+                <class>com.rapidminer.extension.hanminer.operator.analyzing.EntityRecognition</class>
+            </operator>
+        </group>
+    </group>
+</operators>
